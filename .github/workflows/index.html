@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Career Guidance</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+@keyframes float-delayed {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+}
+
+@keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.5); }
+    50% { box-shadow: 0 0 40px rgba(59, 130, 246, 0.8); }
+}
+
+@keyframes slide-up {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+    animation: float-delayed 7s ease-in-out infinite;
+    animation-delay: 1s;
+}
+
+.animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-slide-up {
+    animation: slide-up 0.8s ease-out forwards;
+}
+
+.animate-fade-in {
+    animation: fade-in 1s ease-out forwards;
+}
+
+.card-hover {
+    transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* BIGGER NAVBAR STYLES */
+.nav-link {
+    position: relative;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    font-size: 1.125rem; /* text-lg */
+    padding: 0.5rem 1rem;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: #0ea5e9;
+    transition: width 0.3s ease;
+    border-radius: 2px;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.nav-link:hover {
+    color: #0ea5e9;
+    text-shadow: 0 0 10px rgba(14, 165, 233, 0.3);
+    transform: scale(1.05);
+}
+
+.nav-link.active {
+    color: #0ea5e9;
+    font-weight: 700;
+}
+
+.nav-link.active::after {
+    width: 100%;
+    background: linear-gradient(90deg, #0ea5e9, #38bdf8);
+    box-shadow: 0 0 10px rgba(14, 165, 233, 0.5);
+}
+
+.nav-link-bg {
+    transition: all 0.3s ease;
+}
+
+.nav-link-bg:hover {
+    background: rgba(14, 165, 233, 0.1);
+    border-radius: 0.5rem;
+}
+
+.btn-hover {
+    transition: all 0.3s ease;
+}
+
+.btn-hover:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(14, 165, 233, 0.3);
+}
+
+.btn-hover:active {
+    transform: scale(0.98);
+}
+
+.gradient-bg {
+    background: linear-gradient(180deg, #f0f9ff 0%, #e0f2fe 100%);
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, #0284c7, #0ea5e9, #38bdf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-image-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 25px 50px -12px rgba(14, 165, 233, 0.15);
+}
+
+.hero-image-container img {
+    transition: transform 0.5s ease;
+}
+
+.hero-image-container:hover img {
+    transform: scale(1.05);
+}
+
+.step-card {
+    transition: all 0.3s ease;
+}
+
+.step-card:hover {
+    transform: scale(1.05);
+}
+</style>
+
+</head>
+
+<body class="bg-sky-50 text-slate-800 overflow-x-hidden">
+
+<!-- BIGGER NAVBAR -->
+<nav class="flex justify-between items-center py-6 px-10 bg-white/95 backdrop-blur-md w-full z-50 border-b-2 border-sky-100 shadow-lg">
+
+<!-- Logo - BIGGER -->
+<h1 class="text-3xl font-bold text-sky-600 tracking-wide">
+    <span class="hover:text-sky-500 transition-colors cursor-pointer">CareerGuide</span>
+</h1>
+
+<!-- Navigation Links - BIGGER -->
+<div class="flex items-center space-x-4">
+
+<a href="index.html" class="nav-link nav-link-bg active text-slate-700 hover:text-sky-600 px-4 py-2">
+    <span class="relative z-10">Home</span>
+</a>
+<a href="career.html" class="nav-link nav-link-bg text-slate-700 hover:text-sky-600 px-4 py-2">
+    <span class="relative z-10">Career Path</span>
+</a>
+<a href="about.html" class="nav-link nav-link-bg text-slate-700 hover:text-sky-600 px-4 py-2">
+    <span class="relative z-10">About</span>
+</a>
+<a href="contact.html" class="nav-link nav-link-bg text-slate-700 hover:text-sky-600 px-4 py-2">
+    <span class="relative z-10">Contact</span>
+</a>
+
+<!-- Auth Buttons - BIGGER -->
+<div id="auth-buttons" class="flex items-center space-x-4">
+    <a href="login.html" class="nav-btn border-2 border-sky-500 text-sky-600 hover:bg-sky-500 hover:text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 btn-hover text-base">
+        Login
+    </a>
+    <a href="signup.html" class="nav-btn bg-sky-500 hover:bg-sky-600 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 btn-hover text-base shadow-lg shadow-sky-500/30">
+        Sign Up
+    </a>
+</div>
+
+<!-- User Profile (shown when logged in) -->
+<div id="user-profile" class="hidden items-center space-x-4">
+    <div class="flex items-center space-x-3 bg-sky-50 px-4 py-2 rounded-xl border border-sky-100">
+        <div class="w-10 h-10 bg-sky-500 rounded-full flex items-center justify-center">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+            </svg>
+        </div>
+        <span id="user-name" class="font-semibold text-slate-700">User</span>
+    </div>
+    <button id="logout-btn" class="nav-btn border-2 border-red-500 text-red-500 hover:bg-red-500 hover:text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 btn-hover text-base">
+        Logout
+    </button>
+</div>
+
+</div>
+
+</nav>
+
+<!-- Hero Section -->
+<section class="py-16 flex items-center justify-center gradient-bg">
+
+<div class="container mx-auto px-6 flex flex-col lg:flex-row items-center justify-between">
+    
+    <!-- Left Content -->
+    <div class="lg:w-1/2 text-center lg:text-left">
+        <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+            Discover Your <span class="gradient-text">Future Career</span>
+        </h1>
+        <p class="text-base md:text-lg text-slate-600 mb-6 max-w-lg mx-auto lg:mx-0">
+            Find the best career path based on your skills and interests. 
+            Get personalized recommendations from industry experts.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+            <a href="career.html">
+                <button class="bg-sky-500 btn-hover px-6 py-3 rounded-lg font-semibold">
+                    Explore Careers
+                </button>
+            </a>
+            <a href="about.html">
+                <button class="border-2 border-sky-500 text-sky-600 hover:bg-sky-500 hover:text-white px-6 py-3 rounded-lg font-semibold transition-all">
+                    Learn More
+                </button>
+            </a>
+        </div>
+    </div>
+    
+    <!-- Right Illustration -->
+    <div class="lg:w-1/2 mt-10 lg:mt-0">
+        <div class="hero-image-container max-w-md mx-auto">
+            <img src="career.webp" 
+                 alt="Career Growth" 
+                 class="w-full h-auto rounded-20">
+        </div>
+    </div>
+</div>
+
+</section>
+
+<!-- Features Section -->
+<section class="py-20 bg-white">
+<div class="container mx-auto px-6">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">
+        Why Choose <span class="text-sky-600">CareerGuide?</span>
+    </h2>
+    <p class="text-slate-600 text-center mb-16 max-w-2xl mx-auto">
+        We provide comprehensive tools and resources to help you discover and pursue the perfect career path.
+    </p>
+    
+    <div class="grid md:grid-cols-3 gap-8">
+        <!-- Feature 1 -->
+        <div class="bg-sky-50 p-8 rounded-2xl card-hover border border-sky-100">
+            <div class="w-16 h-16 bg-sky-100 rounded-xl flex items-center justify-center mb-6">
+                <svg class="w-8 h-8 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                </svg>
+            </div>
+            <h3 class="text-xl font-bold mb-4">Career Assessment</h3>
+            <p class="text-slate-600">
+                Take our comprehensive assessments to discover your strengths, interests, and ideal career matches.
+            </p>
+        </div>
+        
+        <!-- Feature 2 -->
+        <div class="bg-sky-50 p-8 rounded-2xl card-hover border border-sky-100">
+            <div class="w-16 h-16 bg-sky-100 rounded-xl flex items-center justify-center mb-6">
+                <svg class="w-8 h-8 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+            </div>
+            <h3 class="text-xl font-bold mb-4">Personalized Paths</h3>
+            <p class="text-slate-600">
+                Get customized career recommendations based on your unique skills, interests, and goals.
+            </p>
+        </div>
+        
+        <!-- Feature 3 -->
+        <div class="bg-sky-50 p-8 rounded-2xl card-hover border border-sky-100">
+            <div class="w-16 h-16 bg-sky-100 rounded-xl flex items-center justify-center mb-6">
+                <svg class="w-8 h-8 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+            </div>
+            <h3 class="text-xl font-bold mb-4">Expert Guidance</h3>
+            <p class="text-slate-600">
+                Connect with industry experts and mentors who can guide you through your career journey.
+            </p>
+        </div>
+    </div>
+</div>
+</section>
+
+<!-- How It Works Section -->
+<section class="py-20 bg-sky-50">
+<div class="container mx-auto px-6">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">
+        How It <span class="text-sky-600">Works</span>
+    </h2>
+    <p class="text-slate-600 text-center mb-16 max-w-2xl mx-auto">
+        Follow these simple steps to start your career exploration journey.
+    </p>
+    
+    <div class="grid md:grid-cols-4 gap-8">
+        <!-- Step 1 -->
+        <div class="text-center step-card">
+            <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6 text-3xl font-bold text-sky-600 shadow-md">
+                1
+            </div>
+            <h3 class="text-lg font-bold mb-2">Create Account</h3>
+            <p class="text-slate-600 text-sm">Sign up for free and create your personalized profile.</p>
+        </div>
+        
+        <!-- Step 2 -->
+        <div class="text-center step-card">
+            <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6 text-3xl font-bold text-sky-600 shadow-md">
+                2
+            </div>
+            <h3 class="text-lg font-bold mb-2">Take Assessment</h3>
+            <p class="text-slate-600 text-sm">Complete our career interest questionnaire.</p>
+        </div>
+        
+        <!-- Step 3 -->
+        <div class="text-center step-card">
+            <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6 text-3xl font-bold text-sky-600 shadow-md">
+                3
+            </div>
+            <h3 class="text-lg font-bold mb-2">Get Recommendations</h3>
+            <p class="text-slate-600 text-sm">Receive personalized career suggestions.</p>
+        </div>
+        
+        <!-- Step 4 -->
+        <div class="text-center step-card">
+            <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6 text-3xl font-bold text-sky-600 shadow-md">
+                4
+            </div>
+            <h3 class="text-lg font-bold mb-2">Start Your Journey</h3>
+            <p class="text-slate-600 text-sm">Begin your path to a fulfilling career.</p>
+        </div>
+    </div>
+</div>
+</section>
+
+<!-- Why Start With Us -->
+<section class="py-20 bg-white">
+<div class="container mx-auto px-6">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">
+        Why Start With <span class="text-sky-600">CareerGuide?</span>
+    </h2>
+    <p class="text-slate-600 text-center mb-16 max-w-2xl mx-auto">
+        We're building the future of career discovery. Join us in shaping how people find their dream jobs.
+    </p>
+    
+    <div class="grid md:grid-cols-3 gap-8">
+        <!-- Benefit 1 -->
+        <div class="bg-sky-50 p-8 rounded-2xl border border-sky-100 card-hover">
+            <div class="w-16 h-16 bg-sky-100 rounded-xl flex items-center justify-center mb-6">
+                <svg class="w-8 h-8 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                </svg>
+            </div>
+            <h3 class="text-xl font-bold mb-4">Fast Growth</h3>
+            <p class="text-slate-600">
+                Accelerate your career growth with personalized paths tailored to your unique potential and market demands.
+            </p>
+        </div>
+        
+        <!-- Benefit 2 -->
+        <div class="bg-sky-50 p-8 rounded-2xl border border-sky-100 card-hover">
+            <div class="w-16 h-16 bg-sky-100 rounded-xl flex items-center justify-center mb-6">
+                <svg class="w-8 h-8 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+            </div>
+            <h3 class="text-xl font-bold mb-4">Community Driven</h3>
+            <p class="text-slate-600">
+                Join thousands of professionals sharing insights, opportunities, and supporting each other's growth journeys.
+            </p>
+        </div>
+        
+        <!-- Benefit 3 -->
+        <div class="bg-sky-50 p-8 rounded-2xl border border-sky-100 card-hover">
+            <div class="w-16 h-16 bg-sky-100 rounded-xl flex items-center justify-center mb-6">
+                <svg class="w-8 h-8 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                </svg>
+            </div>
+            <h3 class="text-xl font-bold mb-4">Verified Opportunities</h3>
+            <p class="text-slate-600">
+                Access curated job listings from verified employers with transparent hiring processes.
+            </p>
+        </div>
+    </div>
+</div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-20 bg-sky-500">
+<div class="container mx-auto px-6 text-center">
+    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-white">
+        Ready to Discover Your Dream Career?
+    </h2>
+    <p class="text-xl mb-8 text-white/90">
+        Take the first step towards your future today.
+    </p>
+    <a href="signup.html">
+        <button class="bg-white text-sky-600 hover:bg-sky-50 px-10 py-4 rounded-lg text-lg font-bold btn-hover">
+            Get Started Free
+        </button>
+    </a>
+</div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-white py-8 border-t border-sky-100">
+<div class="container mx-auto px-6 text-center">
+    <div class="mb-4">
+        <span class="text-sky-600 font-bold text-xl">CareerGuide</span>
+    </div>
+    <div class="flex justify-center gap-6 mb-4">
+        <a href="index.html" class="text-slate-500 hover:text-sky-600 transition-colors">Home</a>
+        <a href="career.html" class="text-slate-500 hover:text-sky-600 transition-colors">Careers</a>
+        <a href="about.html" class="text-slate-500 hover:text-sky-600 transition-colors">About</a>
+        <a href="contact.html" class="text-slate-500 hover:text-sky-600 transition-colors">Contact</a>
+    </div>
+    <p class="text-slate-400 text-sm">© 2026 CareerGuide. All rights reserved.</p>
+</div>
+</footer>
+
+<script src="main.js"></script>
+
+</body>
+</html>
+
