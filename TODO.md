@@ -1,12 +1,20 @@
-# Navbar Enhancement TODO
+# TODO - Aptitude Assessment Implementation
 
-## Task: Make navbar big, add blue line for active page, make more interactive
+## Task
+Create aptitude assessment feature with interactive MCQ questions
 
-### Steps:
-- [x] 1. Update public/index.html - Enhance navbar (bigger, interactive, active Home)
-- [x] 2. Update public/career.html - Create big interactive navbar with active Career
-- [x] 3. Update public/about.html - Enhance navbar (already has active About)
-- [x] 4. Update public/contact.html - Add complete big interactive navbar with active Contact
-- [x] 5. Update public/login.html - Add complete big interactive navbar with active Login
-- [x] 6. Update public/signup.html - Add complete big interactive navbar with active Sign Up
+## Files Created
+
+- [x] 1. Create TODO.md for tracking progress
+- [x] 2. Create assessment.html - Main assessment page with aptitude card
+- [x] 3. Create aptitude-quanti.html - Quantitative Aptitude (30 Q)
+- [x] 4. Create aptitude-logic.html - Logical Reasoning (30 Q)
+- [x] 5. Create aptitude-verbal.html - Verbal Ability (30 Q)
+
+## Questions per Section
+- Quantitative Aptitude: 30 questions
+- Logical Reasoning: 30 questions
+- Verbal Ability: 30 questions
+
+## Progress: 5/5 completed ✅
 

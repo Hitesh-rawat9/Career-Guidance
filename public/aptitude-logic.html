@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Logical Reasoning - CareerGuide</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+.nav-link { position: relative; transition: all 0.3s ease; font-weight: 600; font-size: 1.125rem; padding: 0.5rem 1rem; }
+.nav-link::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 3px; background: #0ea5e9; transition: width 0.3s ease; border-radius: 2px; }
+.nav-link:hover::after { width: 100%; }
+.nav-link:hover { color: #0ea5e9; text-shadow: 0 0 10px rgba(14, 165, 233, 0.3); transform: scale(1.05); }
+.nav-link.active { color: #0ea5e9; font-weight: 700; }
+.nav-link.active::after { width: 100%; background: linear-gradient(90deg, #0ea5e9, #38bdf8); box-shadow: 0 0 10px rgba(14, 165, 233, 0.5); }
+.nav-link-bg { transition: all 0.3s ease; }
+.nav-link-bg:hover { background: rgba(14, 165, 233, 0.1); border-radius: 0.5rem; }
+.btn-hover { transition: all 0.3s ease; }
+.btn-hover:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(14, 165, 233, 0.3); }
+.btn-hover:active { transform: scale(0.98); }
+
+.question-card {
+    transition: all 0.3s ease;
+}
+.question-card:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+.option-btn {
+    transition: all 0.2s ease;
+}
+.option-btn:hover {
+    border-color: #8b5cf6;
+    background: #f5f3ff;
+}
+.option-btn.selected {
+    border-color: #8b5cf6;
+    background: #ede9fe;
+}
+</style>
+
+</head>
+
+<body class="bg-gradient-to-br from-violet-50 to-indigo-50 text-slate-800 min-h-screen">
+
+<!-- NAVBAR -->
+<nav class="flex justify-between items-center py-4 px-10 bg-white/95 backdrop-blur-md w-full z-50 border-b-2 border-sky-100 shadow-lg">
+<h1 class="text-2xl font-bold text-sky-600 tracking-wide">
+    <a href="index.html" class="hover:text-sky-500 transition-colors cursor-pointer">CareerGuide</a>
+</h1>
+<div class="flex items-center space-x-4">
+<a href="index.html" class="nav-link nav-link-bg text-slate-700 hover:text-sky-600 px-3 py-2"><span class="relative z-10">Home</span></a>
+<a href="career.html" class="nav-link nav-link-bg text-slate-700 hover:text-sky-600 px-3 py-2"><span class="relative z-10">Career Path</span></a>
+<a href="certificates.html" class="nav-link nav-link-bg text-slate-700 hover:text-sky-600 px-3 py-2"><span class="relative z-10">Certificates</span></a>
+<a href="assessment.html" class="nav-link nav-link-bg active text-sky-600 px-3 py-2"><span class="relative z-10">Assessment</span></a>
+<a href="about.html" class="nav-link nav-link-bg text-slate-700 hover:text-sky-600 px-3 py-2"><span class="relative z-10">About</span></a>
+</div>
+</nav>
+
+<!-- Header -->
+<div class="bg-gradient-to-r from-violet-500 to-indigo-600 py-6">
+    <div class="max-w-4xl mx-auto px-6">
+        <a href="assessment.html" class="inline-flex items-center text-white/80 hover:text-white transition-colors">
+            <i class="fa-solid fa-arrow-left mr-2"></i> Back to Assessment
+        </a>
+        <div class="flex items-center justify-between mt-4">
+            <div>
+                <h1 class="text-3xl font-bold text-white">
+                    <i class="fa-solid fa-brain mr-3"></i>Logical Reasoning
+                </h1>
+                <p class="text-white/80 mt-1">30 Questions • Test your logical skills</p>
+            </div>
+            <div class="text-white text-right">
+                <p class="text-sm opacity-80">Question</p>
+                <p class="text-3xl font-bold"><span id="current-q">1</span>/30</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Progress Bar -->
+<div class="bg-white shadow-sm">
+    <div class="max-w-4xl mx-auto px-6 py-3">
+        <div class="flex items-center justify-between text-sm text-slate-600 mb-2">
+            <span>Progress</span>
+            <span id="progress-percent">0%</span>
+        </div>
+        <div class="w-full bg-gray-200 rounded-full h-3">
+            <div id="progress-bar" class="bg-gradient-to-r from-violet-500 to-indigo-500 h-3 rounded-full transition-all duration-300" style="width: 0%"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Quiz Container -->
+<div class="max-w-4xl mx-auto px-6 py-8">
+
+    <!-- Question Card -->
+    <div id="question-container" class="bg-white rounded-2xl shadow-lg p-8 question-card">
+        
+        <!-- Question 1 -->
+        <div class="question" data-id="1">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-violet-100 text-violet-600 font-bold px-3 py-1 rounded-lg">Q1</span>
+                <h3 class="text-xl font-semibold text-slate-800">Find the next number: 2, 6, 12, 20, ?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">26</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">28</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">30</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">32</button>
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question hidden" data-id="2">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-violet-100 text-violet-600 font-bold px-3 py-1 rounded-lg">Q2</span>
+                <h3 class="text-xl font-semibold text-slate-800">If CAT = DBU, then DOG = ?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">EPH</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">EOH</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">EPH</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">EPI</button>
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question hidden" data-id="3">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-violet-100 text-violet-600 font-bold px-3 py-1 rounded-lg">Q3</span>
+                <h3 class="text-xl font-semibold text-slate-800">Odd one out: Apple, Banana, Mango, Car</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Apple</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Banana</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Mango</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">Car</button>
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question hidden" data-id="4">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-violet-100 text-violet-600 font-bold px-3 py-1 rounded-lg">Q4</span>
+                <h3 class="text-xl font-semibold text-slate-800">Find the missing number: 4, 9, 16, 25, ?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">30</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">34</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">36</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">36</button>
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question hidden" data-id="5">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-violet-100 text-violet-600 font-bold px-3 py-1 rounded-lg">Q5</span>
+                <h3 class="text-xl font-semibold text-slate-800">If A = 1, B = 2, what is C?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">2</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">4</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">3</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">5</button>
+            </div>
+        </div>
+
+        <!-- Question 6 -->
+        <div class="question hidden" data-id="6">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-violet-100 text-violet-600 font-bold px-3 py-1 rounded-lg">Q6</span>
+                <h3 class="text-xl font-semibold text-slate-800">Complete the series: A, C, E, G, ?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">H</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">I</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">J</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">K</button>
+            </div>
+        </div>
+
+        <!-- Question 7 -->
+        <div class="question hidden" data-id="7">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-violet-100 text-violet-600 font-bold px-3 py-1 rounded-lg">Q7</span>
+                <h3 class="text-xl font-semibold text-slate-800">Find the odd one: Circle, Triangle, Square, Apple</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Circle</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Triangle</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Square</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">Apple</button>
+            </div>
+        </div>
+
+        <!-- Question 8 -->
+        <div class="question hidden" data-id="8">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-violet-100 text-violet-600 font-bold px-3 py-1 rounded-lg">Q8</span>
+                <h3 class="text-xl font-semibold text-slate-800">If all roses are flowers and some flowers fade quickly, are all roses fading quickly?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Yes</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">Cannot be determined</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">No</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Maybe</button>
+            </div>
+        </div>
+
+        <!-- Question 9 -->
+        <div class="question hidden" data-id="9">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-violet-100 text-violet-600 font-bold px-3 py-1 rounded-lg">Q9</span>
+                <h3 class="text-xl font-semibold text-slate-800">Find the next: 1, 1, 2, 3, 5, ?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">6</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">7</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">8</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">9</button>
+            </div>
+        </div>
+
+        <!-- Question 10 -->
+        <div class="question hidden" data-id="10">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-violet-100 text-violet-600 font-bold px-3 py-1 rounded-lg">Q10</span>
+                <h3 class="text-xl font-semibold text-slate-800">If Monday is the 1st day, what is the 5th day?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Thursday</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Wednesday</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">Friday</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Saturday</button>
+            </div>
+        </div>
+
+        <!-- Question 11 -->
+        <div class="question hidden" data-id="11">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-violet-100 text-violet-600 font-bold px-3 py-1 rounded-lg">Q11</span>
+                <h3 class="text-xl font-semibold text-slate-800">Which number does not belong: 3, 5, 7, 9</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">3</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">5</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">7</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">9</button>
+            </div>
+        </div>
+
+        <!-- Question 12 -->
+        <div class="question hidden" data-id="12">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-violet-100 text-violet-600 font-bold px-3 py-1 rounded-lg">Q12</span>
+                <h3 class="text-xl font-semibold text-slate-800">If 5 + 3 = 28 and 4 + 2 = 12, what is 3 + 1?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">2</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">6</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">4</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">8</button>
+            </div>
+        </div>
+
+        <!-- Question 13 -->
+        <div class="question hidden" data-id="13">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-violet-100 text-violet-600 font-bold px-3 py-1 rounded-lg">Q13</span>
+                <h3 class="text-xl font-semibold text-slate-800">Find the missing: 2, 5, 10, 17, ?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">22</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">26</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">24</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">28</button>
+            </div>
+        </div>
+
+        <!-- Question 14 -->
+        <div class="question hidden" data-id="14">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-violet-100 text-violet-600 font-bold px-3 py-1 rounded-lg">Q14</span>
+                <h3 class="text-xl font-semibold text-slate-800">Mirror image of the letter B looks like?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">D</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">D</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">P</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">q</button>
+            </div>
+        </div>
+
+        <!-- Question 15 -->
+        <div class="question hidden" data-id="15">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-violet-100 text-violet-600 font-bold px-3 py-1 rounded-lg">Q15</span>
+                <h3 class="text-xl font-semibold text-slate-800">If South becomes North, what will East become?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">West</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">West</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">South</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">North</button>
+            </div>
+        </div>
+
+        <!-- Question 16 -->
+        <div class="question hidden" data-id="16">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-violet-100 text-violet-600 font-bold px-3 py-1 rounded-lg">Q16</span>
+                <h3 class="text-xl font-semibold text-slate-800">Find the odd word: Dog, Cat, Cow, Car</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Dog</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Cat</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Cow</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">Car</button>
+            </div>
+        </div>
+
+        <!-- Question 17 -->
+        <div class="question hidden" data-id="17">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-violet-100 text-violet-600 font-bold px-3 py-1 rounded-lg">Q17</span>
+                <h3 class="text-xl font-semibold text-slate-800">Next alphabet: Z, X, V, T, ?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">S</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">R</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Q</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">P</button>
+            </div>
+        </div>
+
+        <!-- Question 18 -->
+        <div class="question hidden" data-id="18">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-violet-100 text-violet-600 font-bold px-3 py-1 rounded-lg">Q18</span>
+                <h3 class="text-xl font-semibold text-slate-800">Find the pattern: 11, 22, 33, 44, ?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">50</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">55</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">55</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">66</button>
+            </div>
+        </div>
+
+        <!-- Question 19 -->
+        <div class="question hidden" data-id="19">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-violet-100 text-violet-600 font-bold px-3 py-1 rounded-lg">Q19</span>
+                <h3 class="text-xl font-semibold text-slate-800">If 8 people finish a task in 4 days, how many days will 4 people take?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">2 days</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">4 days</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">8 days</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">6 days</button>
+            </div>
+        </div>
+
+        <!-- Question 20 -->
+        <div class="question hidden" data-id="20">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-violet-100 text-violet-600 font-bold px-3 py-1 rounded-lg">Q20</span>
+                <h3 class="text-xl font-semibold text-slate-800">Find the next: 3, 6, 12, 24, ?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">36</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">42</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">48</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">50</button>
+            </div>
+        </div>
+
+        <!-- Question 21 -->
+        <div class="question hidden" data-id="21">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-violet-100 text-violet-600 font-bold px-3 py-1 rounded-lg">Q21</span>
+                <h3 class="text-xl font-semibold text-slate-800">Which number is different: 16, 25, 36, 45</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">16</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">25</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">36</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">45</button>
+            </div>
+        </div>
+
+        <!-- Question 22 -->
+        <div class="question hidden" data-id="22">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-violet-100 text-violet-600 font-bold px-3 py-1 rounded-lg">Q22</span>
+                <h3 class="text-xl font-semibold text-slate-800">If pencil relates to write, knife relates to?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Cut</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">Cut</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Eat</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Draw</button>
+            </div>
+        </div>
+
+        <!-- Question 23 -->
+        <div class="question hidden" data-id="23">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-violet-100 text-violet-600 font-bold px-3 py-1 rounded-lg">Q23</span>
+                <h3 class="text-xl font-semibold text-slate-800">Find the missing: 7, 14, 21, ?, 35</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">24</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">26</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">28</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">30</button>
+            </div>
+        </div>
+
+        <!-- Question 24 -->
+        <div class="question hidden" data-id="24">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-violet-100 text-violet-600 font-bold px-3 py-1 rounded-lg">Q24</span>
+                <h3 class="text-xl font-semibold text-slate-800">If A is taller than B and B taller than C, who is tallest?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">B</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">C</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">A</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Cannot be determined</button>
+            </div>
+        </div>
+
+        <!-- Question 25 -->
+        <div class="question hidden" data-id="25">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-violet-100 text-violet-600 font-bold px-3 py-1 rounded-lg">Q25</span>
+                <h3 class="text-xl font-semibold text-slate-800">Which is the odd number: 12, 18, 24, 35</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">12</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">18</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">24</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">35</button>
+            </div>
+        </div>
+
+        <!-- Question 26 -->
+        <div class="question hidden" data-id="26">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-violet-100 text-violet-600 font-bold px-3 py-1 rounded-lg">Q26</span>
+                <h3 class="text-xl font-semibold text-slate-800">If today is Wednesday, what day will it be after 5 days?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Sunday</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Monday</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">Monday</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Tuesday</button>
+            </div>
+        </div>
+
+        <!-- Question 27 -->
+        <div class="question hidden" data-id="27">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-violet-100 text-violet-600 font-bold px-3 py-1 rounded-lg">Q27</span>
+                <h3 class="text-xl font-semibold text-slate-800">Find the next: 9, 18, 27, 36, ?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">42</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">45</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">45</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">48</button>
+            </div>
+        </div>
+
+        <!-- Question 28 -->
+        <div class="question hidden" data-id="28">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-violet-100 text-violet-600 font-bold px-3 py-1 rounded-lg">Q28</span>
+                <h3 class="text-xl font-semibold text-slate-800">If 2 → 4, 3 → 9, then 4 → ?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">12</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">14</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">16</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">20</button>
+            </div>
+        </div>
+
+        <!-- Question 29 -->
+        <div class="question hidden" data-id="29">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-violet-100 text-violet-600 font-bold px-3 py-1 rounded-lg">Q29</span>
+                <h3 class="text-xl font-semibold text-slate-800">Complete: B, D, F, H, ?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">I</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">J</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">J</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">K</button>
+            </div>
+        </div>
+
+        <!-- Question 30 -->
+        <div class="question hidden" data-id="30">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-violet-100 text-violet-600 font-bold px-3 py-1 rounded-lg">Q30</span>
+                <h3 class="text-xl font-semibold text-slate-800">Which word is different: Table, Chair, Bed, Banana</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Table</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Chair</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Bed</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">Banana</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="flex justify-between mt-8">
+        <button id="prev-btn" class="hidden px-6 py-3 bg-gray-200 hover:bg-gray-300 rounded-xl font-semibold transition btn-hover">
+            <i class="fa-solid fa-arrow-left mr-2"></i> Previous
+        </button>
+        <button id="next-btn" class="ml-auto px-6 py-3 bg-violet-500 hover:bg-violet-600 text-white rounded-xl font-semibold transition btn-hover">
+            Next <i class="fa-solid fa-arrow-right ml-2"></i>
+        </button>
+        <button id="submit-btn" class="hidden ml-auto px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-xl font-semibold transition btn-hover">
+            Submit <i class="fa-solid fa-check ml-2"></i>
+        </button>
+    </div>
+
+    <!-- Results Section -->
+    <div id="results" class="hidden bg-white rounded-2xl shadow-lg p-8 text-center">
+        <div class="mb-6">
+            <div class="w-24 h-24 bg-gradient-to-r from-violet-500 to-indigo-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fa-solid fa-trophy text-4xl text-white"></i>
+            </div>
+            <h2 class="text-3xl font-bold text-slate-800">Assessment Complete!</h2>
+            <p class="text-slate-600 mt-2">Here's your score</p>
+        </div>
+        <div class="text-6xl font-bold text-violet-600 mb-2"><span id="score">0</span>/30</div>
+        <p class="text-slate-500 mb-6" id="score-message">Great effort!</p>
+        <div class="flex justify-center gap-4">
+            <a href="aptitude-logic.html" class="px-6 py-3 bg-violet-500 hover:bg-violet-600 text-white rounded-xl font-semibold transition btn-hover">
+                <i class="fa-solid fa-redo mr-2"></i> Retry
+            </a>
+            <a href="aptitude-verbal.html" class="px-6 py-3 bg-indigo-500 hover:bg-indigo-600 text-white rounded-xl font-semibold transition btn-hover">
+                Next Section <i class="fa-solid fa-arrow-right ml-2"></i>
+            </a>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    let currentQuestion = 1;
+    const totalQuestions = 30;
+
+    function showQuestion(num) {
+        document.querySelectorAll('.question').forEach(q => q.classList.add('hidden'));
+        document.querySelector(`.question[data-id="${num}"]`).classList.remove('hidden');
+        document.getElementById('current-q').textContent = num;
+        
+        const progress = ((num - 1) / totalQuestions) * 100;
+        document.getElementById('progress-bar').style.width = progress + '%';
+        document.getElementById('progress-percent').textContent = Math.round(progress) + '%';
+        
+        document.getElementById('prev-btn').classList.toggle('hidden', num === 1);
+        document.getElementById('next-btn').classList.toggle('hidden', num === totalQuestions);
+        document.getElementById('submit-btn').classList.toggle('hidden', num !== totalQuestions);
+    }
+
+    function calculateScore() {
+        let score = 0;
+        document.querySelectorAll('.question').forEach(q => {
+            const selected = q.querySelector('.selected');
+            if (selected && selected.dataset.correct === 'true') {
+                score++;
+            }
+        });
+        return score;
+    }
+
+    function showResults() {
+        const score = calculateScore();
+        document.getElementById('question-container').classList.add('hidden');
+        document.getElementById('prev-btn').classList.add('hidden');
+        document.getElementById('next-btn').classList.add('hidden');
+        document.getElementById('submit-btn').classList.add('hidden');
+        document.getElementById('results').classList.remove('hidden');
+        
+        document.getElementById('score').textContent = score;
+        
+        let message = '';
+        if (score >= 25) message = 'Excellent! You have great logical reasoning skills!';
+        else if (score >= 20) message = 'Good job! Keep practicing!';
+        else if (score >= 15) message = 'Not bad! Room for improvement.';
+        else message = 'Keep learning and try again!';
+        document.getElementById('score-message').textContent = message;
+    }
+
+    document.querySelectorAll('.option-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const parent = this.closest('.question');
+            parent.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+            this.classList.add('selected');
+        });
+    });
+
+    document.getElementById('prev-btn').addEventListener('click', () => {
+        if (currentQuestion > 1) {
+            currentQuestion--;
+            showQuestion(currentQuestion);
+        }
+    });
+
+    document.getElementById('next-btn').addEventListener('click', () => {
+        if (currentQuestion < totalQuestions) {
+            currentQuestion++;
+            showQuestion(currentQuestion);
+        }
+    });
+
+    document.getElementById('submit-btn').addEventListener('click', showResults);
+
+    showQuestion(1);
+</script>
+
+</body>
+</html>
+

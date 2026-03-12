@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Design & Creative Arts Careers</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+.nav-link { position: relative; transition: all 0.3s ease; font-weight: 600; font-size: 1.125rem; padding: 0.5rem 1rem; }
+.nav-link::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 3px; background: #0ea5e9; transition: width 0.3s ease; border-radius: 2px; }
+.nav-link:hover::after { width: 100%; }
+.nav-link:hover { color: #0ea5e9; text-shadow: 0 0 10px rgba(14, 165, 233, 0.3); transform: scale(1.05); }
+.nav-link.active { color: #0ea5e9; font-weight: 700; }
+.nav-link.active::after { width: 100%; background: linear-gradient(90deg, #0ea5e9, #38bdf8); box-shadow: 0 0 10px rgba(14, 165, 233, 0.5); }
+.nav-link-bg { transition: all 0.3s ease; }
+.nav-link-bg:hover { background: rgba(14, 165, 233, 0.1); border-radius: 0.5rem; }
+.btn-hover { transition: all 0.3s ease; }
+.btn-hover:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(14, 165, 233, 0.3); }
+.btn-hover:active { transform: scale(0.98); }
+.card-hover { transition: all 0.3s ease; }
+.card-hover:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1); }
+</style>
+
+</head>
+
+<body class="bg-sky-50 text-slate-800">
+
+<nav class="flex justify-between items-center py-6 px-10 bg-white/95 backdrop-blur-md w-full z-50 border-b-2 border-sky-100 shadow-lg">
+<h1 class="text-3xl font-bold text-sky-600 tracking-wide">
+    <a href="index.html" class="hover:text-sky-500 transition-colors cursor-pointer">CareerGuide</a>
+</h1>
+<div class="flex items-center space-x-4">
+<a href="index.html" class="nav-link nav-link-bg text-slate-700 hover:text-sky-600 px-4 py-2"><span class="relative z-10">Home</span></a>
+<a href="career.html" class="nav-link nav-link-bg active text-sky-600 px-4 py-2"><span class="relative z-10">Career Path</span></a>
+<a href="about.html" class="nav-link nav-link-bg text-slate-700 hover:text-sky-600 px-4 py-2"><span class="relative z-10">About</span></a>
+<a href="contact.html" class="nav-link nav-link-bg text-slate-700 hover:text-sky-600 px-4 py-2"><span class="relative z-10">Contact</span></a>
+<div id="auth-buttons" class="flex items-center space-x-4">
+    <a href="login.html" class="nav-btn border-2 border-sky-500 text-sky-600 hover:bg-sky-500 hover:text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 btn-hover text-base">Login</a>
+    <a href="signup.html" class="nav-btn bg-sky-500 hover:bg-sky-600 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 btn-hover text-base shadow-lg shadow-sky-500/30">Sign Up</a>
+</div>
+</div>
+</nav>
+
+<div class="max-w-5xl mx-auto px-6 pt-8">
+    <a href="career.html" class="inline-flex items-center text-sky-600 hover:text-sky-700 font-semibold transition-colors">
+        <i class="fa-solid fa-arrow-left mr-2"></i> Back to Career Paths
+    </a>
+</div>
+
+<section class="max-w-5xl mx-auto px-6 pb-8">
+    <div class="flex items-center space-x-4 mb-4">
+        <div class="bg-pink-100 text-pink-500 p-4 rounded-xl">
+            <i class="fa-solid fa-palette text-3xl"></i>
+        </div>
+        <div>
+            <h1 class="text-4xl font-bold text-slate-800">Design & Creative Arts</h1>
+            <p class="text-slate-600 mt-1">Express creativity through visual storytelling, branding, and user experiences.</p>
+        </div>
+    </div>
+</section>
+
+<section class="max-w-5xl mx-auto px-6 pb-8">
+    <div class="bg-white p-6 rounded-xl shadow-sm border">
+        <h2 class="text-xl font-bold text-sky-600 mb-4">Overview</h2>
+        <p class="text-slate-600 leading-relaxed">The design and creative arts field blends artistic talent with technology to create visually compelling experiences. From branding and marketing materials to digital interfaces and physical spaces, designers shape how we interact with the world. India's creative economy is thriving with opportunities in advertising, tech, fashion, and entertainment.</p>
+    </div>
+</section>
+
+<section class="max-w-5xl mx-auto px-6 pb-20">
+    <h2 class="text-2xl font-bold text-slate-800 mb-8">Career Roles in Design & Creative Arts</h2>
+    <div class="space-y-6">
+
+        <div class="max-w-5xl mx-auto bg-white rounded-xl shadow-md p-8 border card-hover">
+            <div class="flex items-start gap-4 mb-4">
+                <div class="bg-pink-100 text-pink-500 p-3 rounded-lg"><i class="fa-solid fa-pen-nib text-xl"></i></div>
+                <div class="flex-1">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-2">Graphic Designer</h2>
+                    <p class="text-gray-600 mb-6">Create visual content for print and digital media including logos, brochures, advertisements, social media graphics, and brand identities using design software.</p>
+                    <div class="grid md:grid-cols-3 gap-4 mb-6">
+                        <div class="bg-pink-50 rounded-lg p-4 flex gap-3 items-start"><span class="text-pink-500 text-xl">₹</span><div><p class="text-sm text-gray-500">Avg Salary</p><p class="font-semibold text-gray-800">₹3–12 LPA</p></div></div>
+                        <div class="bg-pink-50 rounded-lg p-4 flex gap-3 items-start"><span class="text-pink-500 text-xl">🎓</span><div><p class="text-sm text-gray-500">Education</p><p class="font-semibold text-gray-800">B.Des / Diploma</p></div></div>
+                        <div class="bg-pink-50 rounded-lg p-4 flex gap-3 items-start"><span class="text-pink-500 text-xl">📈</span><div><p class="text-sm text-gray-500">Growth</p><p class="font-semibold text-gray-800">Steady</p></div></div>
+                    </div>
+                    <div><p class="text-sm font-semibold text-gray-500 mb-2">Key Skills</p><div class="flex flex-wrap gap-2"><span class="bg-slate-100 text-slate-600 text-sm px-3 py-1 rounded-full">Adobe Photoshop</span><span class="bg-slate-100 text-slate-600 text-sm px-3 py-1 rounded-full">Illustrator</span><span class="bg-slate-100 text-slate-600 text-sm px-3 py-1 rounded-full">Typography</span></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-5xl mx-auto bg-white rounded-xl shadow-md p-8 border card-hover">
+            <div class="flex items-start gap-4 mb-4">
+                <div class="bg-purple-100 text-purple-600 p-3 rounded-lg"><i class="fa-solid fa-layer-group text-xl"></i></div>
+                <div class="flex-1">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-2">UI/UX Designer</h2>
+                    <p class="text-gray-600 mb-6">Design intuitive and engaging user interfaces for websites and apps. Conduct user research, create wireframes and prototypes, and ensure seamless user experiences.</p>
+                    <div class="grid md:grid-cols-3 gap-4 mb-6">
+                        <div class="bg-purple-50 rounded-lg p-4 flex gap-3 items-start"><span class="text-purple-600 text-xl">₹</span><div><p class="text-sm text-gray-500">Avg Salary</p><p class="font-semibold text-gray-800">₹5–25 LPA</p></div></div>
+                        <div class="bg-purple-50 rounded-lg p-4 flex gap-3 items-start"><span class="text-purple-600 text-xl">🎓</span><div><p class="text-sm text-gray-500">Education</p><p class="font-semibold text-gray-800">B.Des / Portfolio</p></div></div>
+                        <div class="bg-purple-50 rounded-lg p-4 flex gap-3 items-start"><span class="text-purple-600 text-xl">📈</span><div><p class="text-sm text-gray-500">Growth</p><p class="font-semibold text-gray-800">Very High</p></div></div>
+                    </div>
+                    <div><p class="text-sm font-semibold text-gray-500 mb-2">Key Skills</p><div class="flex flex-wrap gap-2"><span class="bg-slate-100 text-slate-600 text-sm px-3 py-1 rounded-full">Figma</span><span class="bg-slate-100 text-slate-600 text-sm px-3 py-1 rounded-full">User Research</span><span class="bg-slate-100 text-slate-600 text-sm px-3 py-1 rounded-full">Prototyping</span></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-5xl mx-auto bg-white rounded-xl shadow-md p-8 border card-hover">
+            <div class="flex items-start gap-4 mb-4">
+                <div class="bg-amber-100 text-amber-600 p-3 rounded-lg"><i class="fa-solid fa-couch text-xl"></i></div>
+                <div class="flex-1">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-2">Interior Designer</h2>
+                    <p class="text-gray-600 mb-6">Plan and design indoor spaces for homes, offices, restaurants, and commercial establishments. Balance aesthetics, functionality, and safety in space planning.</p>
+                    <div class="grid md:grid-cols-3 gap-4 mb-6">
+                        <div class="bg-amber-50 rounded-lg p-4 flex gap-3 items-start"><span class="text-amber-600 text-xl">₹</span><div><p class="text-sm text-gray-500">Avg Salary</p><p class="font-semibold text-gray-800">₹3–15 LPA</p></div></div>
+                        <div class="bg-amber-50 rounded-lg p-4 flex gap-3 items-start"><span class="text-amber-600 text-xl">🎓</span><div><p class="text-sm text-gray-500">Education</p><p class="font-semibold text-gray-800">B.Sc/B.Des Interior</p></div></div>
+                        <div class="bg-amber-50 rounded-lg p-4 flex gap-3 items-start"><span class="text-amber-600 text-xl">📈</span><div><p class="text-sm text-gray-500">Growth</p><p class="font-semibold text-gray-800">Growing</p></div></div>
+                    </div>
+                    <div><p class="text-sm font-semibold text-gray-500 mb-2">Key Skills</p><div class="flex flex-wrap gap-2"><span class="bg-slate-100 text-slate-600 text-sm px-3 py-1 rounded-full">AutoCAD</span><span class="bg-slate-100 text-slate-600 text-sm px-3 py-1 rounded-full">3D Visualization</span><span class="bg-slate-100 text-slate-600 text-sm px-3 py-1 rounded-full">Space Planning</span></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-5xl mx-auto bg-white rounded-xl shadow-md p-8 border card-hover">
+            <div class="flex items-start gap-4 mb-4">
+                <div class="bg-rose-100 text-rose-500 p-3 rounded-lg"><i class="fa-solid fa-shirt text-xl"></i></div>
+                <div class="flex-1">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-2">Fashion Designer</h2>
+                    <p class="text-gray-600 mb-6">Create clothing, accessories, and footwear designs. Work on concept sketches, fabric selection, pattern making, and overseeing production of fashion collections.</p>
+                    <div class="grid md:grid-cols-3 gap-4 mb-6">
+                        <div class="bg-rose-50 rounded-lg p-4 flex gap-3 items-start"><span class="text-rose-500 text-xl">₹</span><div><p class="text-sm text-gray-500">Avg Salary</p><p class="font-semibold text-gray-800">₹3–20 LPA</p></div></div>
+                        <div class="bg-rose-50 rounded-lg p-4 flex gap-3 items-start"><span class="text-rose-500 text-xl">🎓</span><div><p class="text-sm text-gray-500">Education</p><p class="font-semibold text-gray-800">B.Des Fashion (NIFT)</p></div></div>
+                        <div class="bg-rose-50 rounded-lg p-4 flex gap-3 items-start"><span class="text-rose-500 text-xl">📈</span><div><p class="text-sm text-gray-500">Growth</p><p class="font-semibold text-gray-800">Moderate</p></div></div>
+                    </div>
+                    <div><p class="text-sm font-semibold text-gray-500 mb-2">Key Skills</p><div class="flex flex-wrap gap-2"><span class="bg-slate-100 text-slate-600 text-sm px-3 py-1 rounded-full">Sketching</span><span class="bg-slate-100 text-slate-600 text-sm px-3 py-1 rounded-full">Pattern Making</span><span class="bg-slate-100 text-slate-600 text-sm px-3 py-1 rounded-full">Textile Knowledge</span></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-5xl mx-auto bg-white rounded-xl shadow-md p-8 border card-hover">
+            <div class="flex items-start gap-4 mb-4">
+                <div class="bg-cyan-100 text-cyan-600 p-3 rounded-lg"><i class="fa-solid fa-film text-xl"></i></div>
+                <div class="flex-1">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-2">Animator</h2>
+                    <p class="text-gray-600 mb-6">Create animations for films, TV shows, games, advertisements, and digital content. Use 2D/3D software to bring characters, environments, and stories to life.</p>
+                    <div class="grid md:grid-cols-3 gap-4 mb-6">
+                        <div class="bg-cyan-50 rounded-lg p-4 flex gap-3 items-start"><span class="text-cyan-600 text-xl">₹</span><div><p class="text-sm text-gray-500">Avg Salary</p><p class="font-semibold text-gray-800">₹3–18 LPA</p></div></div>
+                        <div class="bg-cyan-50 rounded-lg p-4 flex gap-3 items-start"><span class="text-cyan-600 text-xl">🎓</span><div><p class="text-sm text-gray-500">Education</p><p class="font-semibold text-gray-800">B.Des/Diploma Animation</p></div></div>
+                        <div class="bg-cyan-50 rounded-lg p-4 flex gap-3 items-start"><span class="text-cyan-600 text-xl">📈</span><div><p class="text-sm text-gray-500">Growth</p><p class="font-semibold text-gray-800">High</p></div></div>
+                    </div>
+                    <div><p class="text-sm font-semibold text-gray-500 mb-2">Key Skills</p><div class="flex flex-wrap gap-2"><span class="bg-slate-100 text-slate-600 text-sm px-3 py-1 rounded-full">Maya</span><span class="bg-slate-100 text-slate-600 text-sm px-3 py-1 rounded-full">Blender</span><span class="bg-slate-100 text-slate-600 text-sm px-3 py-1 rounded-full">After Effects</span></div></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<footer class="bg-white py-6 border-t border-sky-100">
+<div class="container mx-auto px-6 text-center">
+    <div class="mb-4"><span class="text-sky-600 font-bold text-xl">CareerGuide</span></div>
+    <div class="flex justify-center gap-6 mb-4">
+        <a href="index.html" class="text-slate-500 hover:text-sky-600 transition-colors">Home</a>
+        <a href="career.html" class="text-slate-500 hover:text-sky-600 transition-colors">Careers</a>
+        <a href="about.html" class="text-slate-500 hover:text-sky-600 transition-colors">About</a>
+        <a href="contact.html" class="text-slate-500 hover:text-sky-600 transition-colors">Contact</a>
+    </div>
+    <p class="text-slate-400 text-sm">© 2026 CareerGuide. All rights reserved.</p>
+</div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
+

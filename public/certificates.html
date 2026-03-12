@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Free Certificates - CareerGuide</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+.nav-link { position: relative; transition: all 0.3s ease; font-weight: 600; font-size: 1.125rem; padding: 0.5rem 1rem; }
+.nav-link::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 3px; background: #0ea5e9; transition: width 0.3s ease; border-radius: 2px; }
+.nav-link:hover::after { width: 100%; }
+.nav-link:hover { color: #0ea5e9; text-shadow: 0 0 10px rgba(14, 165, 233, 0.3); transform: scale(1.05); }
+.nav-link.active { color: #0ea5e9; font-weight: 700; }
+.nav-link.active::after { width: 100%; background: linear-gradient(90deg, #0ea5e9, #38bdf8); box-shadow: 0 0 10px rgba(14, 165, 233, 0.5); }
+.nav-link-bg { transition: all 0.3s ease; }
+.nav-link-bg:hover { background: rgba(14, 165, 233, 0.1); border-radius: 0.5rem; }
+.btn-hover { transition: all 0.3s ease; }
+.btn-hover:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(14, 165, 233, 0.3); }
+.btn-hover:active { transform: scale(0.98); }
+.card-hover { transition: all 0.3s ease; }
+.card-hover:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1); }
+</style>
+
+</head>
+
+<body class="bg-sky-50 text-slate-800">
+
+<nav class="flex justify-between items-center py-6 px-10 bg-white/95 backdrop-blur-md w-full z-50 border-b-2 border-sky-100 shadow-lg">
+<h1 class="text-3xl font-bold text-sky-600 tracking-wide">
+    <a href="index.html" class="hover:text-sky-500 transition-colors cursor-pointer">CareerGuide</a>
+</h1>
+<div class="flex items-center space-x-4">
+<a href="index.html" class="nav-link nav-link-bg text-slate-700 hover:text-sky-600 px-4 py-2"><span class="relative z-10">Home</span></a>
+<a href="career.html" class="nav-link nav-link-bg text-slate-700 hover:text-sky-600 px-4 py-2"><span class="relative z-10">Career Path</span></a>
+<a href="assessment.html" class="nav-link nav-link-bg text-slate-700 hover:text-sky-600 px-4 py-2"><span class="relative z-10">Assessment</span></a>
+<a href="certificates.html" class="nav-link nav-link-bg active text-sky-600 px-4 py-2"><span class="relative z-10">Certificates</span></a>
+<a href="about.html" class="nav-link nav-link-bg text-slate-700 hover:text-sky-600 px-4 py-2"><span class="relative z-10">About</span></a>
+<a href="contact.html" class="nav-link nav-link-bg text-slate-700 hover:text-sky-600 px-4 py-2"><span class="relative z-10">Contact</span></a>
+<div id="auth-buttons" class="flex items-center space-x-4">
+    <a href="login.html" class="nav-btn border-2 border-sky-500 text-sky-600 hover:bg-sky-500 hover:text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 btn-hover text-base">Login</a>
+    <a href="signup.html" class="nav-btn bg-sky-500 hover:bg-sky-600 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 btn-hover text-base shadow-lg shadow-sky-500/30">Sign Up</a>
+</div>
+<div id="user-profile" class="hidden items-center space-x-4">
+    <div class="flex items-center space-x-3 bg-sky-50 px-4 py-2 rounded-xl border border-sky-100">
+        <div class="w-10 h-10 bg-sky-500 rounded-full flex items-center justify-center">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+            </svg>
+        </div>
+        <span id="user-name" class="font-semibold text-slate-700">User</span>
+    </div>
+    <button id="logout-btn" class="nav-btn border-2 border-red-500 text-red-500 hover:bg-red-500 hover:text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 btn-hover text-base">
+        Logout
+    </button>
+</div>
+</div>
+</nav>
+
+<section class="max-w-5xl mx-auto px-6 pb-8">
+    <div class="flex items-center space-x-4 mb-4">
+        <div class="bg-emerald-100 text-emerald-600 p-4 rounded-xl">
+            <i class="fa-solid fa-certificate text-3xl"></i>
+        </div>
+        <div>
+            <h1 class="text-4xl font-bold text-slate-800">Free Certificates</h1>
+            <p class="text-slate-600 mt-1">Boost your resume with free certifications from top platforms.</p>
+        </div>
+    </div>
+</section>
+
+<section class="max-w-5xl mx-auto px-6 pb-20">
+    <div class="space-y-8">
+
+        <!-- Information Technology -->
+        <div class="bg-white rounded-xl shadow-md p-8 border">
+            <div class="flex items-center gap-4 mb-6">
+                <div class="bg-blue-100 text-blue-600 p-3 rounded-lg"><i class="fa-solid fa-code text-xl"></i></div>
+                <h2 class="text-2xl font-bold text-gray-800">Information Technology</h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-4">
+                <a href="https://www.coursera.org/browse/information-technology" target="_blank" class="flex items-center gap-3 p-4 border rounded-lg hover:bg-sky-50 transition card-hover">
+                    <i class="fa-solid fa-graduation-cap text-blue-600 text-xl"></i>
+                    <div>
+                        <p class="font-semibold text-gray-800">Coursera IT Courses</p>
+                        <p class="text-sm text-gray-500">Free certificates available</p>
+                    </div>
+                </a>
+                <a href="https://www.edx.org/course/subject/computer-science" target="_blank" class="flex items-center gap-3 p-4 border rounded-lg hover:bg-sky-50 transition card-hover">
+                    <i class="fa-solid fa-graduation-cap text-blue-600 text-xl"></i>
+                    <div>
+                        <p class="font-semibold text-gray-800">edX CS Courses</p>
+                        <p class="text-sm text-gray-500">Free certificates available</p>
+                    </div>
+                </a>
+                <a href="https://www.freecodecamp.org/" target="_blank" class="flex items-center gap-3 p-4 border rounded-lg hover:bg-sky-50 transition card-hover">
+                    <i class="fa-solid fa-laptop-code text-blue-600 text-xl"></i>
+                    <div>
+                        <p class="font-semibold text-gray-800">freeCodeCamp</p>
+                        <p class="text-sm text-gray-500">Free coding certifications</p>
+                    </div>
+                </a>
+                <a href="https://www.kaggle.com/learn" target="_blank" class="flex items-center gap-3 p-4 border rounded-lg hover:bg-sky-50 transition card-hover">
+                    <i class="fa-solid fa-database text-blue-600 text-xl"></i>
+                    <div>
+                        <p class="font-semibold text-gray-800">Kaggle Learn</p>
+                        <p class="text-sm text-gray-500">Free data science certificates</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Healthcare -->
+        <div class="bg-white rounded-xl shadow-md p-8 border">
+            <div class="flex items-center gap-4 mb-6">
+                <div class="bg-red-100 text-red-500 p-3 rounded-lg"><i class="fa-solid fa-stethoscope text-xl"></i></div>
+                <h2 class="text-2xl font-bold text-gray-800">Healthcare & Medicine</h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-4">
+                <a href="https://www.coursera.org/browse/health" target="_blank" class="flex items-center gap-3 p-4 border rounded-lg hover:bg-sky-50 transition card-hover">
+                    <i class="fa-solid fa-graduation-cap text-red-500 text-xl"></i>
+                    <div>
+                        <p class="font-semibold text-gray-800">Coursera Health Courses</p>
+                        <p class="text-sm text-gray-500">Free certificates available</p>
+                    </div>
+                </a>
+                <a href="https://www.edx.org/course/subject/health" target="_blank" class="flex items-center gap-3 p-4 border rounded-lg hover:bg-sky-50 transition card-hover">
+                    <i class="fa-solid fa-graduation-cap text-red-500 text-xl"></i>
+                    <div>
+                        <p class="font-semibold text-gray-800">edX Health Courses</p>
+                        <p class="text-sm text-gray-500">Free certificates available</p>
+                    </div>
+                </a>
+                <a href="https://www.medsci.org/" target="_blank" class="flex items-center gap-3 p-4 border rounded-lg hover:bg-sky-50 transition card-hover">
+                    <i class="fa-solid fa-heart-pulse text-red-500 text-xl"></i>
+                    <div>
+                        <p class="font-semibold text-gray-800">MedSci Resources</p>
+                        <p class="text-sm text-gray-500">Free medical certificates</p>
+                    </div>
+                </a>
+                <a href="https://www.openwho.org/" target="_blank" class="flex items-center gap-3 p-4 border rounded-lg hover:bg-sky-50 transition card-hover">
+                    <i class="fa-solid fa-virus text-red-500 text-xl"></i>
+                    <div>
+                        <p class="font-semibold text-gray-800">OpenWHO</p>
+                        <p class="text-sm text-gray-500">Free health certificates</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Engineering -->
+        <div class="bg-white rounded-xl shadow-md p-8 border">
+            <div class="flex items-center gap-4 mb-6">
+                <div class="bg-yellow-100 text-yellow-600 p-3 rounded-lg"><i class="fa-solid fa-gears text-xl"></i></div>
+                <h2 class="text-2xl font-bold text-gray-800">Engineering</h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-4">
+                <a href="https://www.coursera.org/browse/engineering" target="_blank" class="flex items-center gap-3 p-4 border rounded-lg hover:bg-sky-50 transition card-hover">
+                    <i class="fa-solid fa-graduation-cap text-yellow-600 text-xl"></i>
+                    <div>
+                        <p class="font-semibold text-gray-800">Coursera Engineering</p>
+                        <p class="text-sm text-gray-500">Free certificates available</p>
+                    </div>
+                </a>
+                <a href="https://www.nptel.ac.in/" target="_blank" class="flex items-center gap-3 p-4 border rounded-lg hover:bg-sky-50 transition card-hover">
+                    <i class="fa-solid fa-university text-yellow-600 text-xl"></i>
+                    <div>
+                        <p class="font-semibold text-gray-800">NPTEL</p>
+                        <p class="text-sm text-gray-500">Free certificates from IITs</p>
+                    </div>
+                </a>
+                <a href="https://www.swayam.gov.in/" target="_blank" class="flex items-center gap-3 p-4 border rounded-lg hover:bg-sky-50 transition card-hover">
+                    <i class="fa-solid fa-school text-yellow-600 text-xl"></i>
+                    <div>
+                        <p class="font-semibold text-gray-800">SWAYAM</p>
+                        <p class="text-sm text-gray-500">Free government certificates</p>
+                    </div>
+                </a>
+                <a href="https://www.autoedutech.com/" target="_blank" class="flex items-center gap-3 p-4 border rounded-lg hover:bg-sky-50 transition card-hover">
+                    <i class="fa-solid fa-car text-yellow-600 text-xl"></i>
+                    <div>
+                        <p class="font-semibold text-gray-800">AutoEdu Tech</p>
+                        <p class="text-sm text-gray-500">Free automotive certificates</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Law -->
+        <div class="bg-white rounded-xl shadow-md p-8 border">
+            <div class="flex items-center gap-4 mb-6">
+                <div class="bg-green-100 text-green-600 p-3 rounded-lg"><i class="fa-solid fa-scale-balanced text-xl"></i></div>
+                <h2 class="text-2xl font-bold text-gray-800">Law & Judiciary</h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-4">
+                <a href="https://www.coursera.org/browse/law" target="_blank" class="flex items-center gap-3 p-4 border rounded-lg hover:bg-sky-50 transition card-hover">
+                    <i class="fa-solid fa-graduation-cap text-green-600 text-xl"></i>
+                    <div>
+                        <p class="font-semibold text-gray-800">Coursera Law Courses</p>
+                        <p class="text-sm text-gray-500">Free certificates available</p>
+                    </div>
+                </a>
+                <a href="https://www.edx.org/course/subject/law" target="_blank" class="flex items-center gap-3 p-4 border rounded-lg hover:bg-sky-50 transition card-hover">
+                    <i class="fa-solid fa-graduation-cap text-green-600 text-xl"></i>
+                    <div>
+                        <p class="font-semibold text-gray-800">edX Law Courses</p>
+                        <p class="text-sm text-gray-500">Free certificates available</p>
+                    </div>
+                </a>
+                <a href="https://www.udemy.com/courses/law/" target="_blank" class="flex items-center gap-3 p-4 border rounded-lg hover:bg-sky-50 transition card-hover">
+                    <i class="fa-solid fa-gavel text-green-600 text-xl"></i>
+                    <div>
+                        <p class="font-semibold text-gray-800">Udemy Law</p>
+                        <p class="text-sm text-gray-500">Free courses available</p>
+                    </div>
+                </a>
+                <a href="https://www.vidhi.org/" target="_blank" class="flex items-center gap-3 p-4 border rounded-lg hover:bg-sky-50 transition card-hover">
+                    <i class="fa-solid fa-book text-green-600 text-xl"></i>
+                    <div>
+                        <p class="font-semibold text-gray-800">Vidhi Centre</p>
+                        <p class="text-sm text-gray-500">Legal research certificates</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Finance -->
+        <div class="bg-white rounded-xl shadow-md p-8 border">
+            <div class="flex items-center gap-4 mb-6">
+                <div class="bg-emerald-100 text-emerald-600 p-3 rounded-lg"><i class="fa-solid fa-dollar-sign text-xl"></i></div>
+                <h2 class="text-2xl font-bold text-gray-800">Finance & Banking</h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-4">
+                <a href="https://www.coursera.org/browse/finance" target="_blank" class="flex items-center gap-3 p-4 border rounded-lg hover:bg-sky-50 transition card-hover">
+                    <i class="fa-solid fa-graduation-cap text-emerald-600 text-xl"></i>
+                    <div>
+                        <p class="font-semibold text-gray-800">Coursera Finance</p>
+                        <p class="text-sm text-gray-500">Free certificates available</p>
+                    </div>
+                </a>
+                <a href="https://www.edx.org/course/subject/business" target="_blank" class="flex items-center gap-3 p-4 border rounded-lg hover:bg-sky-50 transition card-hover">
+                    <i class="fa-solid fa-graduation-cap text-emerald-600 text-xl"></i>
+                    <div>
+                        <p class="font-semibold text-gray-800">edX Business Courses</p>
+                        <p class="text-sm text-gray-500">Free certificates available</p>
+                    </div>
+                </a>
+                <a href="https://www.udemy.com/courses/finance/" target="_blank" class="flex items-center gap-3 p-4 border rounded-lg hover:bg-sky-50 transition card-hover">
+                    <i class="fa-solid fa-chart-line text-emerald-600 text-xl"></i>
+                    <div>
+                        <p class="font-semibold text-gray-800">Udemy Finance</p>
+                        <p class="text-sm text-gray-500">Free courses available</p>
+                    </div>
+                </a>
+                <a href="https://www.investopedia.com/" target="_blank" class="flex items-center gap-3 p-4 border rounded-lg hover:bg-sky-50 transition card-hover">
+                    <i class="fa-solid fa-chart-pie text-emerald-600 text-xl"></i>
+                    <div>
+                        <p class="font-semibold text-gray-800">Investopedia Academy</p>
+                        <p class="text-sm text-gray-500">Free certificates available</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Design -->
+        <div class="bg-white rounded-xl shadow-md p-8 border">
+            <div class="flex items-center gap-4 mb-6">
+                <div class="bg-pink-100 text-pink-500 p-3 rounded-lg"><i class="fa-solid fa-palette text-xl"></i></div>
+                <h2 class="text-2xl font-bold text-gray-800">Design & Creative Arts</h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-4">
+                <a href="https://www.freecodecamp.org/" target="_blank" class="flex items-center gap-3 p-4 border rounded-lg hover:bg-sky-50 transition card-hover">
+                    <i class="fa-solid fa-paint-brush text-pink-500 text-xl"></i>
+                    <div>
+                        <p class="font-semibold text-gray-800">freeCodeCamp Design</p>
+                        <p class="text-sm text-gray-500">Free certificates</p>
+                    </div>
+                </a>
+                <a href="https://www.canva.com/learn/" target="_blank" class="flex items-center gap-3 p-4 border rounded-lg hover:bg-sky-50 transition card-hover">
+                    <i class="fa-solid fa-pen-nib text-pink-500 text-xl"></i>
+                    <div>
+                        <p class="font-semibold text-gray-800">Canva Design School</p>
+                        <p class="text-sm text-gray-500">Free certificates</p>
+                    </div>
+                </a>
+                <a href="https://www.behance.net/" target="_blank" class="flex items-center gap-3 p-4 border rounded-lg hover:bg-sky-50 transition card-hover">
+                    <i class="fa-solid fa-palette text-pink-500 text-xl"></i>
+                    <div>
+                        <p class="font-semibold text-gray-800">Behance</p>
+                        <p class="text-sm text-gray-500">Portfolio certificates</p>
+                    </div>
+                </a>
+                <a href="https://www.udemy.com/courses/design/" target="_blank" class="flex items-center gap-3 p-4 border rounded-lg hover:bg-sky-50 transition card-hover">
+                    <i class="fa-solid fa-vector-square text-pink-500 text-xl"></i>
+                    <div>
+                        <p class="font-semibold text-gray-800">Udemy Design</p>
+                        <p class="text-sm text-gray-500">Free courses available</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Science -->
+        <div class="bg-white rounded-xl shadow-md p-8 border">
+            <div class="flex items-center gap-4 mb-6">
+                <div class="bg-purple-100 text-purple-600 p-3 rounded-lg"><i class="fa-solid fa-flask text-xl"></i></div>
+                <h2 class="text-2xl font-bold text-gray-800">Science & Research</h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-4">
+                <a href="https://www.coursera.org/browse/science" target="_blank" class="flex items-center gap-3 p-4 border rounded-lg hover:bg-sky-50 transition card-hover">
+                    <i class="fa-solid fa-graduation-cap text-purple-600 text-xl"></i>
+                    <div>
+                        <p class="font-semibold text-gray-800">Coursera Science</p>
+                        <p class="text-sm text-gray-500">Free certificates available</p>
+                    </div>
+                </a>
+                <a href="https://www.khanacademy.org/" target="_blank" class="flex items-center gap-3 p-4 border rounded-lg hover:bg-sky-50 transition card-hover">
+                    <i class="fa-solid fa-flask text-purple-600 text-xl"></i>
+                    <div>
+                        <p class="font-semibold text-gray-800">Khan Academy</p>
+                        <p class="text-sm text-gray-500">Free certificates</p>
+                    </div>
+                </a>
+                <a href="https://www.futurelearn.com/" target="_blank" class="flex items-center gap-3 p-4 border rounded-lg hover:bg-sky-50 transition card-hover">
+                    <i class="fa-solid fa-graduation-cap text-purple-600 text-xl"></i>
+                    <div>
+                        <p class="font-semibold text-gray-800">FutureLearn Science</p>
+                        <p class="text-sm text-gray-500">Free certificates available</p>
+                    </div>
+                </a>
+                <a href="https://www.mooc.org/" target="_blank" class="flex items-center gap-3 p-4 border rounded-lg hover:bg-sky-50 transition card-hover">
+                    <i class="fa-solid fa-atom text-purple-600 text-xl"></i>
+                    <div>
+                        <p class="font-semibold text-gray-800">MOOC.org</p>
+                        <p class="text-sm text-gray-500">Free science certificates</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Media & Journalism -->
+        <div class="bg-white rounded-xl shadow-md p-8 border">
+            <div class="flex items-center gap-4 mb-6">
+                <div class="bg-orange-100 text-orange-600 p-3 rounded-lg"><i class="fa-solid fa-newspaper text-xl"></i></div>
+                <h2 class="text-2xl font-bold text-gray-800">Media & Journalism</h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-4">
+                <a href="https://www.coursera.org/browse/journalism" target="_blank" class="flex items-center gap-3 p-4 border rounded-lg hover:bg-sky-50 transition card-hover">
+                    <i class="fa-solid fa-graduation-cap text-orange-600 text-xl"></i>
+                    <div>
+                        <p class="font-semibold text-gray-800">Coursera Journalism</p>
+                        <p class="text-sm text-gray-500">Free certificates available</p>
+                    </div>
+                </a>
+                <a href="https://www.udemy.com/courses/journalism/" target="_blank" class="flex items-center gap-3 p-4 border rounded-lg hover:bg-sky-50 transition card-hover">
+                    <i class="fa-solid fa-pen text-orange-600 text-xl"></i>
+                    <div>
+                        <p class="font-semibold text-gray-800">Udemy Journalism</p>
+                        <p class="text-sm text-gray-500">Free courses available</p>
+                    </div>
+                </a>
+                <a href="https://www.alison.com/courses/media" target="_blank" class="flex items-center gap-3 p-4 border rounded-lg hover:bg-sky-50 transition card-hover">
+                    <i class="fa-solid fa-newspaper text-orange-600 text-xl"></i>
+                    <div>
+                        <p class="font-semibold text-gray-800">Alison Media</p>
+                        <p class="text-sm text-gray-500">Free certificates</p>
+                    </div>
+                </a>
+                <a href="https://www.linkedin.com/learning/" target="_blank" class="flex items-center gap-3 p-4 border rounded-lg hover:bg-sky-50 transition card-hover">
+                    <i class="fa-solid fa-video text-orange-600 text-xl"></i>
+                    <div>
+                        <p class="font-semibold text-gray-800">LinkedIn Learning</p>
+                        <p class="text-sm text-gray-500">Free courses available</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Arts & Entertainment -->
+        <div class="bg-white rounded-xl shadow-md p-8 border">
+            <div class="flex items-center gap-4 mb-6">
+                <div class="bg-rose-100 text-rose-600 p-3 rounded-lg"><i class="fa-solid fa-masks-theater text-xl"></i></div>
+                <h2 class="text-2xl font-bold text-gray-800">Arts & Entertainment</h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-4">
+                <a href="https://www.coursera.org/browse/arts" target="_blank" class="flex items-center gap-3 p-4 border rounded-lg hover:bg-sky-50 transition card-hover">
+                    <i class="fa-solid fa-graduation-cap text-rose-600 text-xl"></i>
+                    <div>
+                        <p class="font-semibold text-gray-800">Coursera Arts</p>
+                        <p class="text-sm text-gray-500">Free certificates available</p>
+                    </div>
+                </a>
+                <a href="https://www.skillshare.com/browse" target="_blank" class="flex items-center gap-3 p-4 border rounded-lg hover:bg-sky-50 transition card-hover">
+                    <i class="fa-solid fa-palette text-rose-600 text-xl"></i>
+                    <div>
+                        <p class="font-semibold text-gray-800">Skillshare</p>
+                        <p class="text-sm text-gray-500">Free certificates</p>
+                    </div>
+                </a>
+                <a href="https://www.udemy.com/courses/music/" target="_blank" class="flex items-center gap-3 p-4 border rounded-lg hover:bg-sky-50 transition card-hover">
+                    <i class="fa-solid fa-music text-rose-600 text-xl"></i>
+                    <div>
+                        <p class="font-semibold text-gray-800">Udemy Music</p>
+                        <p class="text-sm text-gray-500">Free courses available</p>
+                    </div>
+                </a>
+                <a href="https://www.masterclass.com/" target="_blank" class="flex items-center gap-3 p-4 border rounded-lg hover:bg-sky-50 transition card-hover">
+                    <i class="fa-solid fa-film text-rose-600 text-xl"></i>
+                    <div>
+                        <p class="font-semibold text-gray-800">MasterClass</p>
+                        <p class="text-sm text-gray-500">Free courses available</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Emerging Tech -->
+        <div class="bg-white rounded-xl shadow-md p-8 border">
+            <div class="flex items-center gap-4 mb-6">
+                <div class="bg-cyan-100 text-cyan-600 p-3 rounded-lg"><i class="fa-solid fa-microchip text-xl"></i></div>
+                <h2 class="text-2xl font-bold text-gray-800">Emerging Tech</h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-4">
+                <a href="https://www.coursera.org/browse/data-science" target="_blank" class="flex items-center gap-3 p-4 border rounded-lg hover:bg-sky-50 transition card-hover">
+                    <i class="fa-solid fa-graduation-cap text-cyan-600 text-xl"></i>
+                    <div>
+                        <p class="font-semibold text-gray-800">Coursera Data Science</p>
+                        <p class="text-sm text-gray-500">Free certificates available</p>
+                    </div>
+                </a>
+                <a href="https://www.udacity.com/" target="_blank" class="flex items-center gap-3 p-4 border rounded-lg hover:bg-sky-50 transition card-hover">
+                    <i class="fa-solid fa-robot text-cyan-600 text-xl"></i>
+                    <div>
+                        <p class="font-semibold text-gray-800">Udacity</p>
+                        <p class="text-sm text-gray-500">Free nanodegrees</p>
+                    </div>
+                </a>
+                <a href="https://www.ibm.com/training" target="_blank" class="flex items-center gap-3 p-4 border rounded-lg hover:bg-sky-50 transition card-hover">
+                    <i class="fa-solid fa-brain text-cyan-600 text-xl"></i>
+                    <div>
+                        <p class="font-semibold text-gray-800">IBM Training</p>
+                        <p class="text-sm text-gray-500">Free certificates</p>
+                    </div>
+                </a>
+                <a href="https://www.tensorflow.org/" target="_blank" class="flex items-center gap-3 p-4 border rounded-lg hover:bg-sky-50 transition card-hover">
+                    <i class="fa-solid fa-network-wired text-cyan-600 text-xl"></i>
+                    <div>
+                        <p class="font-semibold text-gray-800">TensorFlow</p>
+                        <p class="text-sm text-gray-500">Free AI/ML certificates</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Government -->
+        <div class="bg-white rounded-xl shadow-md p-8 border">
+            <div class="flex items-center gap-4 mb-6">
+                <div class="bg-red-100 text-red-600 p-3 rounded-lg"><i class="fa-solid fa-landmark text-xl"></i></div>
+                <h2 class="text-2xl font-bold text-gray-800">Government & Civil Services</h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-4">
+                <a href="https://www.nptel.ac.in/" target="_blank" class="flex items-center gap-3 p-4 border rounded-lg hover:bg-sky-50 transition card-hover">
+                    <i class="fa-solid fa-university text-red-600 text-xl"></i>
+                    <div>
+                        <p class="font-semibold text-gray-800">NPTEL</p>
+                        <p class="text-sm text-gray-500">Free certificates from IITs</p>
+                    </div>
+                </a>
+                <a href="https://www.swayam.gov.in/" target="_blank" class="flex items-center gap-3 p-4 border rounded-lg hover:bg-sky-50 transition card-hover">
+                    <i class="fa-solid fa-school text-red-600 text-xl"></i>
+                    <div>
+                        <p class="font-semibold text-gray-800">SWAYAM</p>
+                        <p class="text-sm text-gray-500">Free government certificates</p>
+                    </div>
+                </a>
+                <a href="https://www.mygov.in/" target="_blank" class="flex items-center gap-3 p-4 border rounded-lg hover:bg-sky-50 transition card-hover">
+                    <i class="fa-solid fa-flag text-red-600 text-xl"></i>
+                    <div>
+                        <p class="font-semibold text-gray-800">MyGov</p>
+                        <p class="text-sm text-gray-500">Government certificates</p>
+                    </div>
+                </a>
+                <a href="https://www.digilocker.gov.in/" target="_blank" class="flex items-center gap-3 p-4 border rounded-lg hover:bg-sky-50 transition card-hover">
+                    <i class="fa-solid fa-id-card text-red-600 text-xl"></i>
+                    <div>
+                        <p class="font-semibold text-gray-800">DigiLocker</p>
+                        <p class="text-sm text-gray-500">Government document verification</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<footer class="bg-white py-6 border-t border-sky-100">
+<div class="container mx-auto px-6 text-center">
+    <div class="mb-4"><span class="text-sky-600 font-bold text-xl">CareerGuide</span></div>
+<div class="flex justify-center gap-6 mb-4">
+        <a href="index.html" class="text-slate-500 hover:text-sky-600 transition-colors">Home</a>
+        <a href="career.html" class="text-slate-500 hover:text-sky-600 transition-colors">Career Path</a>
+        <a href="assessment.html" class="text-slate-500 hover:text-sky-600 transition-colors">Assessment</a>
+        <a href="certificates.html" class="text-slate-500 hover:text-sky-600 transition-colors">Certificates</a>
+        <a href="about.html" class="text-slate-500 hover:text-sky-600 transition-colors">About</a>
+        <a href="contact.html" class="text-slate-500 hover:text-sky-600 transition-colors">Contact</a>
+    </div>
+    <p class="text-slate-400 text-sm">© 2026 CareerGuide. All rights reserved.</p>
+</div>
+
+<script src="main.js"></script>
+
+</body>
+</html>
+

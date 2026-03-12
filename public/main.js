@@ -3,7 +3,24 @@
 // Check login status on page load
 document.addEventListener('DOMContentLoaded', function() {
     updateNavbar();
+    checkAuthForProtectedPages();
 });
+
+// Check if user is logged in for protected pages
+function checkAuthForProtectedPages() {
+    const protectedPages = ['assessment.html', 'aptitude-quanti.html', 'aptitude-logic.html', 'aptitude-verbal.html', 'certificates.html'];
+    const currentPage = window.location.pathname.split('/').pop();
+    
+    if (protectedPages.includes(currentPage)) {
+        const user = getUser();
+        if (!user) {
+            // Store the intended destination
+            sessionStorage.setItem('redirectAfterLogin', currentPage);
+            // Redirect to login
+            window.location.href = 'login.html';
+        }
+    }
+}
 
 // Update navbar based on login status
 function updateNavbar() {
@@ -71,11 +88,19 @@ async function handleLogin(event) {
         
         const data = await response.json();
         
-        if (data.success) {
+if (data.success) {
             // Store user data
             setUser(data.user);
-            // Redirect to home page
-            window.location.href = 'index.html';
+            
+            // Check if there's a redirect destination
+            const redirectPage = sessionStorage.getItem('redirectAfterLogin');
+            if (redirectPage) {
+                sessionStorage.removeItem('redirectAfterLogin');
+                window.location.href = redirectPage;
+            } else {
+                // Redirect to home page
+                window.location.href = 'index.html';
+            }
         } else {
             alert(data.message || 'Login failed');
             submitBtn.textContent = originalText;

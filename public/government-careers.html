@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Government & Civil Services Careers</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+.nav-link { position: relative; transition: all 0.3s ease; font-weight: 600; font-size: 1.125rem; padding: 0.5rem 1rem; }
+.nav-link::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 3px; background: #0ea5e9; transition: width 0.3s ease; border-radius: 2px; }
+.nav-link:hover::after { width: 100%; }
+.nav-link:hover { color: #0ea5e9; text-shadow: 0 0 10px rgba(14, 165, 233, 0.3); transform: scale(1.05); }
+.nav-link.active { color: #0ea5e9; font-weight: 700; }
+.nav-link.active::after { width: 100%; background: linear-gradient(90deg, #0ea5e9, #38bdf8); box-shadow: 0 0 10px rgba(14, 165, 233, 0.5); }
+.nav-link-bg { transition: all 0.3s ease; }
+.nav-link-bg:hover { background: rgba(14, 165, 233, 0.1); border-radius: 0.5rem; }
+.btn-hover { transition: all 0.3s ease; }
+.btn-hover:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(14, 165, 233, 0.3); }
+.btn-hover:active { transform: scale(0.98); }
+.card-hover { transition: all 0.3s ease; }
+.card-hover:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1); }
+</style>
+
+</head>
+
+<body class="bg-sky-50 text-slate-800">
+
+<nav class="flex justify-between items-center py-6 px-10 bg-white/95 backdrop-blur-md w-full z-50 border-b-2 border-sky-100 shadow-lg">
+<h1 class="text-3xl font-bold text-sky-600 tracking-wide">
+    <a href="index.html" class="hover:text-sky-500 transition-colors cursor-pointer">CareerGuide</a>
+</h1>
+<div class="flex items-center space-x-4">
+<a href="index.html" class="nav-link nav-link-bg text-slate-700 hover:text-sky-600 px-4 py-2"><span class="relative z-10">Home</span></a>
+<a href="career.html" class="nav-link nav-link-bg active text-sky-600 px-4 py-2"><span class="relative z-10">Career Path</span></a>
+<a href="about.html" class="nav-link nav-link-bg text-slate-700 hover:text-sky-600 px-4 py-2"><span class="relative z-10">About</span></a>
+<a href="contact.html" class="nav-link nav-link-bg text-slate-700 hover:text-sky-600 px-4 py-2"><span class="relative z-10">Contact</span></a>
+<div id="auth-buttons" class="flex items-center space-x-4">
+    <a href="login.html" class="nav-btn border-2 border-sky-500 text-sky-600 hover:bg-sky-500 hover:text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 btn-hover text-base">Login</a>
+    <a href="signup.html" class="nav-btn bg-sky-500 hover:bg-sky-600 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 btn-hover text-base shadow-lg shadow-sky-500/30">Sign Up</a>
+</div>
+</div>
+</nav>
+
+<div class="max-w-5xl mx-auto px-6 pt-8">
+    <a href="career.html" class="inline-flex items-center text-sky-600 hover:text-sky-700 font-semibold transition-colors">
+        <i class="fa-solid fa-arrow-left mr-2"></i> Back to Career Paths
+    </a>
+</div>
+
+<section class="max-w-5xl mx-auto px-6 pb-8">
+    <div class="flex items-center space-x-4 mb-4">
+        <div class="bg-red-100 text-red-600 p-4 rounded-xl">
+            <i class="fa-solid fa-landmark text-3xl"></i>
+        </div>
+        <div>
+            <h1 class="text-4xl font-bold text-slate-800">Government & Civil Services</h1>
+            <p class="text-slate-600 mt-1">Serve the nation in administrative, police, foreign affairs, and defence roles.</p>
+        </div>
+    </div>
+</section>
+
+<section class="max-w-5xl mx-auto px-6 pb-8">
+    <div class="bg-white p-6 rounded-xl shadow-sm border">
+        <h2 class="text-xl font-bold text-sky-600 mb-4">Overview</h2>
+        <p class="text-slate-600 leading-relaxed">Government and civil services offer prestigious careers for those who want to serve the nation. These roles involve policy implementation, administrative functions, law enforcement, and diplomatic services. India UPSC Civil Services is one of the most sought-after career paths offering diverse roles like IAS, IPS, and IFS.</p>
+    </div>
+</section>
+
+<section class="max-w-5xl mx-auto px-6 pb-20">
+    <h2 class="text-2xl font-bold text-slate-800 mb-8">Career Roles in Government & Civil Services</h2>
+    <div class="space-y-6">
+
+        <!-- IAS Officer -->
+        <div class="max-w-5xl mx-auto bg-white rounded-xl shadow-md p-8 border card-hover">
+            <div class="flex items-start gap-4 mb-4">
+                <div class="bg-red-100 text-red-600 p-3 rounded-lg"><i class="fa-solid fa-user-tie text-xl"></i></div>
+                <div class="flex-1">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-2">IAS Officer</h2>
+                    <p class="text-gray-600 mb-6">Indian Administrative Service officers are the backbone of governance. They manage district administration, implement government policies, and handle crisis situations at state and national levels.</p>
+                    <div class="grid md:grid-cols-3 gap-4 mb-6">
+                        <div class="bg-red-50 rounded-lg p-4 flex gap-3 items-start"><span class="text-red-600 text-xl">₹</span><div><p class="text-sm text-gray-500">Avg Salary</p><p class="font-semibold text-gray-800">₹10-20 LPA + perks</p></div></div>
+                        <div class="bg-red-50 rounded-lg p-4 flex gap-3 items-start"><span class="text-red-600 text-xl">🎓</span><div><p class="text-sm text-gray-500">Education</p><p class="font-semibold text-gray-800">Any graduate degree + UPSC CSE</p></div></div>
+                        <div class="bg-red-50 rounded-lg p-4 flex gap-3 items-start"><span class="text-red-600 text-xl">📈</span><div><p class="text-sm text-gray-500">Growth</p><p class="font-semibold text-gray-800">Prestigious – limited seats but highest administrative authority</p></div></div>
+                    </div>
+                    <div><p class="text-sm font-semibold text-gray-500 mb-2">Key Skills</p><div class="flex flex-wrap gap-2"><span class="bg-slate-100 text-slate-600 text-sm px-3 py-1 rounded-full">Administration</span><span class="bg-slate-100 text-slate-600 text-sm px-3 py-1 rounded-full">Policy Making</span><span class="bg-slate-100 text-slate-600 text-sm px-3 py-1 rounded-full">Leadership</span><span class="bg-slate-100 text-slate-600 text-sm px-3 py-1 rounded-full">Decision Making</span><span class="bg-slate-100 text-slate-600 text-sm px-3 py-1 rounded-full">Public Speaking</span><span class="bg-slate-100 text-slate-600 text-sm px-3 py-1 rounded-full">Current Affairs</span></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- IPS Officer -->
+        <div class="max-w-5xl mx-auto bg-white rounded-xl shadow-md p-8 border card-hover">
+            <div class="flex items-start gap-4 mb-4">
+                <div class="bg-blue-100 text-blue-600 p-3 rounded-lg"><i class="fa-solid fa-shield-halved text-xl"></i></div>
+                <div class="flex-1">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-2">IPS Officer</h2>
+                    <p class="text-gray-600 mb-6">Indian Police Service officers maintain law and order, investigate crimes, manage police forces, and ensure public safety at district, state, and national levels.</p>
+                    <div class="grid md:grid-cols-3 gap-4 mb-6">
+                        <div class="bg-blue-50 rounded-lg p-4 flex gap-3 items-start"><span class="text-blue-600 text-xl">₹</span><div><p class="text-sm text-gray-500">Avg Salary</p><p class="font-semibold text-gray-800">₹10-18 LPA + perks</p></div></div>
+                        <div class="bg-blue-50 rounded-lg p-4 flex gap-3 items-start"><span class="text-blue-600 text-xl">🎓</span><div><p class="text-sm text-gray-500">Education</p><p class="font-semibold text-gray-800">Any graduate degree + UPSC CSE</p></div></div>
+                        <div class="bg-blue-50 rounded-lg p-4 flex gap-3 items-start"><span class="text-blue-600 text-xl">📈</span><div><p class="text-sm text-gray-500">Growth</p><p class="font-semibold text-gray-800">Prestigious – critical role in maintaining law and order</p></div></div>
+                    </div>
+                    <div><p class="text-sm font-semibold text-gray-500 mb-2">Key Skills</p><div class="flex flex-wrap gap-2"><span class="bg-slate-100 text-slate-600 text-sm px-3 py-1 rounded-full">Law Enforcement</span><span class="bg-slate-100 text-slate-600 text-sm px-3 py-1 rounded-full">Investigation</span><span class="bg-slate-100 text-slate-600 text-sm px-3 py-1 rounded-full">Leadership</span><span class="bg-slate-100 text-slate-600 text-sm px-3 py-1 rounded-full">Physical Fitness</span><span class="bg-slate-100 text-slate-600 text-sm px-3 py-1 rounded-full">Crisis Management</span><span class="bg-slate-100 text-slate-600 text-sm px-3 py-1 rounded-full">Legal Knowledge</span></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- IFS Officer -->
+        <div class="max-w-5xl mx-auto bg-white rounded-xl shadow-md p-8 border card-hover">
+            <div class="flex items-start gap-4 mb-4">
+                <div class="bg-green-100 text-green-600 p-3 rounded-lg"><i class="fa-solid fa-earth-americas text-xl"></i></div>
+                <div class="flex-1">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-2">IFS Officer</h2>
+                    <p class="text-gray-600 mb-6">Indian Foreign Service officers represent India internationally. They handle diplomatic relations, trade negotiations, consular services, and protect Indian interests abroad.</p>
+                    <div class="grid md:grid-cols-3 gap-4 mb-6">
+                        <div class="bg-green-50 rounded-lg p-4 flex gap-3 items-start"><span class="text-green-600 text-xl">₹</span><div><p class="text-sm text-gray-500">Avg Salary</p><p class="font-semibold text-gray-800">₹10-20 LPA + perks</p></div></div>
+                        <div class="bg-green-50 rounded-lg p-4 flex gap-3 items-start"><span class="text-green-600 text-xl">🎓</span><div><p class="text-sm text-gray-500">Education</p><p class="font-semibold text-gray-800">Any graduate degree + UPSC CSE</p></div></div>
+                        <div class="bg-green-50 rounded-lg p-4 flex gap-3 items-start"><span class="text-green-600 text-xl">📈</span><div><p class="text-sm text-gray-500">Growth</p><p class="font-semibold text-gray-800">Prestigious – India's growing global role increases importance</p></div></div>
+                    </div>
+                    <div><p class="text-sm font-semibold text-gray-500 mb-2">Key Skills</p><div class="flex flex-wrap gap-2"><span class="bg-slate-100 text-slate-600 text-sm px-3 py-1 rounded-full">Diplomacy</span><span class="bg-slate-100 text-slate-600 text-sm px-3 py-1 rounded-full">International Relations</span><span class="bg-slate-100 text-slate-600 text-sm px-3 py-1 rounded-full">Languages</span><span class="bg-slate-100 text-slate-600 text-sm px-3 py-1 rounded-full">Negotiation</span><span class="bg-slate-100 text-slate-600 text-sm px-3 py-1 rounded-full">Cultural Awareness</span><span class="bg-slate-100 text-slate-600 text-sm px-3 py-1 rounded-full">Communication</span></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- State PCS -->
+        <div class="max-w-5xl mx-auto bg-white rounded-xl shadow-md p-8 border card-hover">
+            <div class="flex items-start gap-4 mb-4">
+                <div class="bg-amber-100 text-amber-600 p-3 rounded-lg"><i class="fa-solid fa-building-columns text-xl"></i></div>
+                <div class="flex-1">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-2">State PCS</h2>
+                    <p class="text-gray-600 mb-6">State Public Civil Service officers handle state-level administration, policy implementation, and governance. Each state conducts its own PCS examination.</p>
+                    <div class="grid md:grid-cols-3 gap-4 mb-6">
+                        <div class="bg-amber-50 rounded-lg p-4 flex gap-3 items-start"><span class="text-amber-600 text-xl">₹</span><div><p class="text-sm text-gray-500">Avg Salary</p><p class="font-semibold text-gray-800">₹6-15 LPA + perks</p></div></div>
+                        <div class="bg-amber-50 rounded-lg p-4 flex gap-3 items-start"><span class="text-amber-600 text-xl">🎓</span><div><p class="text-sm text-gray-500">Education</p><p class="font-semibold text-gray-800">Any graduate degree + State PSC exam</p></div></div>
+                        <div class="bg-amber-50 rounded-lg p-4 flex gap-3 items-start"><span class="text-amber-600 text-xl">📈</span><div><p class="text-sm text-gray-500">Growth</p><p class="font-semibold text-gray-800">Stable – essential for state governance</p></div></div>
+                    </div>
+                    <div><p class="text-sm font-semibold text-gray-500 mb-2">Key Skills</p><div class="flex flex-wrap gap-2"><span class="bg-slate-100 text-slate-600 text-sm px-3 py-1 rounded-full">State Administration</span><span class="bg-slate-100 text-slate-600 text-sm px-3 py-1 rounded-full">Policy Implementation</span><span class="bg-slate-100 text-slate-600 text-sm px-3 py-1 rounded-full">Public Service</span><span class="bg-slate-100 text-slate-600 text-sm px-3 py-1 rounded-full">Regional Knowledge</span><span class="bg-slate-100 text-slate-600 text-sm px-3 py-1 rounded-full">Management</span><span class="bg-slate-100 text-slate-600 text-sm px-3 py-1 rounded-full">Communication</span></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Defence Services -->
+        <div class="max-w-5xl mx-auto bg-white rounded-xl shadow-md p-8 border card-hover">
+            <div class="flex items-start gap-4 mb-4">
+                <div class="bg-slate-100 text-slate-600 p-3 rounded-lg"><i class="fa-solid fa-jet-fighter text-xl"></i></div>
+                <div class="flex-1">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-2">Defence Services</h2>
+                    <p class="text-gray-600 mb-6">Serve in the Indian Army, Navy, or Air Force. Protect national security, participate in peacekeeping missions, and manage defence operations.</p>
+                    <div class="grid md:grid-cols-3 gap-4 mb-6">
+                        <div class="bg-slate-50 rounded-lg p-4 flex gap-3 items-start"><span class="text-slate-600 text-xl">₹</span><div><p class="text-sm text-gray-500">Avg Salary</p><p class="font-semibold text-gray-800">₹8-18 LPA + perks</p></div></div>
+                        <div class="bg-slate-50 rounded-lg p-4 flex gap-3 items-start"><span class="text-slate-600 text-xl">🎓</span><div><p class="text-sm text-gray-500">Education</p><p class="font-semibold text-gray-800">Graduate + NDA/CDS/AFCAT exam</p></div></div>
+                        <div class="bg-slate-50 rounded-lg p-4 flex gap-3 items-start"><span class="text-slate-600 text-xl">📈</span><div><p class="text-sm text-gray-500">Growth</p><p class="font-semibold text-gray-800">Prestigious – modernization is creating new specialized roles</p></div></div>
+                    </div>
+                    <div><p class="text-sm font-semibold text-gray-500 mb-2">Key Skills</p><div class="flex flex-wrap gap-2"><span class="bg-slate-100 text-slate-600 text-sm px-3 py-1 rounded-full">Physical Fitness</span><span class="bg-slate-100 text-slate-600 text-sm px-3 py-1 rounded-full">Leadership</span><span class="bg-slate-100 text-slate-600 text-sm px-3 py-1 rounded-full">Strategic Thinking</span><span class="bg-slate-100 text-slate-600 text-sm px-3 py-1 rounded-full">Discipline</span><span class="bg-slate-100 text-slate-600 text-sm px-3 py-1 rounded-full">Team Work</span><span class="bg-slate-100 text-slate-600 text-sm px-3 py-1 rounded-full">Technical Skills</span></div></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<footer class="bg-white py-6 border-t border-sky-100">
+<div class="container mx-auto px-6 text-center">
+    <div class="mb-4"><span class="text-sky-600 font-bold text-xl">CareerGuide</span></div>
+    <div class="flex justify-center gap-6 mb-4">
+        <a href="index.html" class="text-slate-500 hover:text-sky-600 transition-colors">Home</a>
+        <a href="career.html" class="text-slate-500 hover:text-sky-600 transition-colors">Careers</a>
+        <a href="about.html" class="text-slate-500 hover:text-sky-600 transition-colors">About</a>
+        <a href="contact.html" class="text-slate-500 hover:text-sky-600 transition-colors">Contact</a>
+    </div>
