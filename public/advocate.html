@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Advocate - Career Details</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>.tab-btn{transition:all .3s}.tab-btn.active{background:#16a34a;color:white}.tab-content{display:none}.tab-content.active{display:block}</style>
+</head>
+<body class="bg-sky-50">
+<nav class="flex justify-between py-4 px-10 bg-white border-b-2 border-sky-100"><h1 class="text-2xl font-bold text-sky-600"><a href="index.html">CareerGuide</a></h1></nav>
+<div class="max-w-5xl mx-auto px-6 pt-6"><a href="law-careers.html" class="text-sky-600 font-semibold"><i class="fa-solid fa-arrow-left mr-2"></i> Back</a></div>
+<section class="max-w-5xl mx-auto px-6 py-8">
+<div class="flex items-start gap-6"><div class="bg-green-100 text-green-600 p-6 rounded-2xl"><i class="fa-solid fa-gavel text-4xl"></i></div>
+<div><h1 class="text-4xl font-bold">Advocate</h1><p class="text-slate-600 mt-2">Represent clients in court, draft legal documents, and argue cases before judges.</p>
+<div class="flex gap-4 mt-4"><div class="bg-green-50 px-4 py-2 rounded-lg"><p class="text-xs">Salary</p><p class="font-bold">₹3–25+ LPA</p></div><div class="bg-green-50 px-4 py-2 rounded-lg"><p class="text-xs">Growth</p><p class="font-bold">Steady</p></div></div></div></div>
+</section>
+<section class="max-w-5xl mx-auto px-6 pb-8">
+<div class="flex gap-2 border-b mb-6 overflow-x-auto">
+<button onclick="showTab('o')" class="tab-btn active px-6 py-3 rounded-t-lg font-semibold" id="tab-o">Overview</button>
+<button onclick="showTab('s')" class="tab-btn px-6 py-3 rounded-t-lg font-semibold bg-slate-100" id="tab-s">Skills</button>
+</div>
+<div class="tab-content active bg-white rounded-2xl shadow-lg p-8" id="content-o">
+<h2 class="text-2xl font-bold mb-4">What does an Advocate do?</h2>
+<p class="text-slate-600 mb-6">Represent clients in court proceedings, draft legal documents, advise on legal matters, argue cases before judges. Can specialize in criminal, civil, or constitutional law.</p>
+<h3 class="text-xl font-semibold mb-3">Specializations</h3>
+<div class="grid grid-cols-4 gap-4"><div class="bg-green-50 p-3 rounded-xl text-center">Criminal</div><div class="bg-green-50 p-3 rounded-xl text-center">Civil</div><div class="bg-green-50 p-3 rounded-xl text-center">Constitutional</div><div class="bg-green-50 p-3 rounded-xl text-center">Family</div></div>
+</div>
+<div class="tab-content bg-white rounded-2xl shadow-lg p-8" id="content-s">
+<h2 class="text-2xl font-bold mb-6">Skills</h2>
+<div class="flex flex-wrap gap-2"><span class="bg-green-100 text-green-700 px-4 py-2 rounded-full">Legal Research</span><span class="bg-green-100 text-green-700 px-4 py-2 rounded-full">Argumentation</span><span class="bg-green-100 text-green-700 px-4 py-2 rounded-full">Drafting</span><span class="bg-green-100 text-green-700 px-4 py-2 rounded-full">Communication</span></div>
+</div>
+</section>
+<footer class="bg-white py-6 text-center"><p class="text-slate-400">© 2026 CareerGuide</p></footer>
+<script>function showTab(t){document.querySelectorAll('.tab-btn').forEach(b=>{b.classList.remove('active');b.classList.add('bg-slate-100')});document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));document.getElementById('tab-'+t).classList.add('active');document.getElementById('content-'+t).classList.add('active');}</script>
+</body>
+</html>

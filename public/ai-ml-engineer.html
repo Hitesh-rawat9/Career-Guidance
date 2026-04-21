@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AI/ML Engineer - Career Details</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+.nav-link { transition: all 0.3s ease; }
+.tab-btn { transition: all 0.3s ease; }
+.tab-btn.active { background: #059669; color: white; }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+</style>
+</head>
+<body class="bg-sky-50">
+<nav class="flex justify-between items-center py-4 px-10 bg-white border-b-2 border-sky-100">
+<h1 class="text-2xl font-bold text-sky-600"><a href="index.html">CareerGuide</a></h1>
+<div class="flex space-x-4"><a href="career.html" class="text-sky-600 font-semibold">Career Path</a></div>
+</nav>
+<div class="max-w-5xl mx-auto px-6 pt-6">
+<a href="it-careers.html" class="text-sky-600 font-semibold"><i class="fa-solid fa-arrow-left mr-2"></i> Back to IT Careers</a>
+</div>
+<section class="max-w-5xl mx-auto px-6 py-8">
+<div class="flex items-start gap-6">
+<div class="bg-emerald-100 text-emerald-600 p-6 rounded-2xl"><i class="fa-solid fa-robot text-4xl"></i></div>
+<div>
+<h1 class="text-4xl font-bold">AI/ML Engineer</h1>
+<p class="text-slate-600 mt-2">Build and deploy artificial intelligence and machine learning models for intelligent applications.</p>
+<div class="flex gap-4 mt-4">
+<div class="bg-emerald-50 px-4 py-2 rounded-lg"><p class="text-xs">Salary</p><p class="font-bold">₹10–35 LPA</p></div>
+<div class="bg-emerald-50 px-4 py-2 rounded-lg"><p class="text-xs">Growth</p><p class="font-bold">Exceptional</p></div>
+</div>
+</div>
+</div>
+</section>
+<section class="max-w-5xl mx-auto px-6 pb-8">
+<div class="flex gap-2 border-b mb-6 overflow-x-auto">
+<button onclick="showTab('overview')" class="tab-btn active px-6 py-3 rounded-t-lg font-semibold" id="tab-overview">Overview</button>
+<button onclick="showTab('skills')" class="tab-btn px-6 py-3 rounded-t-lg font-semibold bg-slate-100" id="tab-skills">Skills</button>
+<button onclick="showTab('career')" class="tab-btn px-6 py-3 rounded-t-lg font-semibold bg-slate-100" id="tab-career">Career Path</button>
+</div>
+<div class="tab-content active bg-white rounded-2xl shadow-lg p-8" id="content-overview">
+<h2 class="text-2xl font-bold mb-4">What does an AI/ML Engineer do?</h2>
+<p class="text-slate-600 mb-6">Build and deploy AI/ML models that automate tasks, recognize patterns, and enable intelligent decision-making.</p>
+<h3 class="text-xl font-semibold mb-3">Key Responsibilities</h3>
+<ul class="space-y-2"><li><i class="fa-solid fa-check text-green-500 mr-2"></i>Build ML models</li><li><i class="fa-solid fa-check text-green-500 mr-2"></i>Deep learning</li><li><i class="fa-solid fa-check text-green-500 mr-2"></i>NLP applications</li><li><i class="fa-solid fa-check text-green-500 mr-2"></i>Model deployment</li></ul>
+</div>
+<div class="tab-content bg-white rounded-2xl shadow-lg p-8" id="content-skills">
+<h2 class="text-2xl font-bold mb-6">Required Skills</h2>
+<div class="flex flex-wrap gap-2"><span class="bg-emerald-100 text-emerald-700 px-4 py-2 rounded-full">Python</span><span class="bg-emerald-100 text-emerald-700 px-4 py-2 rounded-full">Deep Learning</span><span class="bg-emerald-100 text-emerald-700 px-4 py-2 rounded-full">NLP</span><span class="bg-emerald-100 text-emerald-700 px-4 py-2 rounded-full">PyTorch</span><span class="bg-emerald-100 text-emerald-700 px-4 py-2 rounded-full">TensorFlow</span></div>
+</div>
+<div class="tab-content bg-white rounded-2xl shadow-lg p-8" id="content-career">
+<h2 class="text-2xl font-bold mb-6">Career Path</h2>
+<div class="border-l-4 border-emerald-200 ml-4 space-y-6">
+<div class="pl-8"><h3 class="font-semibold">Jr. ML Engineer (0-2 yrs)</h3><p class="text-slate-500">₹6-10 LPA</p></div>
+<div class="pl-8"><h3 class="font-semibold">ML Engineer (2-5 yrs)</h3><p class="text-slate-500">₹10-20 LPA</p></div>
+<div class="pl-8"><h3 class="font-semibold">Sr. ML Engineer (5+ yrs)</h3><p class="text-slate-500">₹20-35 LPA</p></div>
+<div class="pl-8"><h3 class="font-semibold">AI Researcher (8+ yrs)</h3><p class="text-slate-500">₹35-60+ LPA</p></div>
+</div>
+</div>
+</section>
+<footer class="bg-white py-6 text-center mt-12"><p class="text-slate-400">© 2026 CareerGuide</p></footer>
+<script>function showTab(t){document.querySelectorAll('.tab-btn').forEach(b=>{b.classList.remove('active');b.classList.add('bg-slate-100')});document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));document.getElementById('tab-'+t).classList.add('active');document.getElementById('content-'+t).classList.add('active');}</script>
+</body>
+</html>

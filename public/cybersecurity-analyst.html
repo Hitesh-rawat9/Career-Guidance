@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Cybersecurity Analyst - Career Details</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+.nav-link { transition: all 0.3s ease; font-weight: 600; }
+.nav-link:hover { color: #0ea5e9; }
+.tab-btn { transition: all 0.3s ease; }
+.tab-btn.active { background: #0ea5e9; color: white; }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+.timeline-dot::before { content: ''; position: absolute; left: -8px; top: 8px; width: 16px; height: 16px; background: #dc2626; border-radius: 50%; border: 3px solid white; }
+</style>
+</head>
+<body class="bg-sky-50 text-slate-800">
+<nav class="flex justify-between items-center py-4 px-10 bg-white/95 backdrop-blur-md w-full z-50 border-b-2 border-sky-100">
+<h1 class="text-2xl font-bold text-sky-600"><a href="index.html">CareerGuide</a></h1>
+<div class="flex space-x-4">
+<a href="career.html" class="text-sky-600 font-semibold">Career Path</a>
+</div>
+</nav>
+<div class="max-w-5xl mx-auto px-6 pt-6">
+<a href="it-careers.html" class="text-sky-600 font-semibold"><i class="fa-solid fa-arrow-left mr-2"></i> Back to IT Careers</a>
+</div>
+<section class="max-w-5xl mx-auto px-6 py-8">
+<div class="flex items-start gap-6">
+<div class="bg-red-100 text-red-600 p-6 rounded-2xl"><i class="fa-solid fa-shield-halved text-4xl"></i></div>
+<div class="flex-1">
+<h1 class="text-4xl font-bold">Cybersecurity Analyst</h1>
+<p class="text-slate-600 mt-2">Protect organizations from cyber threats by implementing security measures and monitoring systems.</p>
+<div class="flex gap-4 mt-4">
+<div class="bg-red-50 px-4 py-2 rounded-lg"><p class="text-xs">Salary</p><p class="font-bold">₹5–20 LPA</p></div>
+<div class="bg-red-50 px-4 py-2 rounded-lg"><p class="text-xs">Growth</p><p class="font-bold">Very High</p></div>
+</div>
+</div>
+</div>
+</section>
+<section class="max-w-5xl mx-auto px-6 pb-8">
+<div class="flex gap-2 border-b mb-6 overflow-x-auto">
+<button onclick="showTab('overview')" class="tab-btn active px-6 py-3 rounded-t-lg font-semibold" id="tab-overview">Overview</button>
+<button onclick="showTab('skills')" class="tab-btn px-6 py-3 rounded-t-lg font-semibold bg-slate-100" id="tab-skills">Skills</button>
+<button onclick="showTab('career')" class="tab-btn px-6 py-3 rounded-t-lg font-semibold bg-slate-100" id="tab-career">Career Path</button>
+</div>
+<div class="tab-content active bg-white rounded-2xl shadow-lg p-8" id="content-overview">
+<h2 class="text-2xl font-bold mb-4">Job Description</h2>
+<p class="text-slate-600 mb-6">Cybersecurity Analysts protect organizations from cyber threats by monitoring networks, identifying vulnerabilities, and implementing security measures.</p>
+<h3 class="text-xl font-semibold mb-3">Key Responsibilities</h3>
+<ul class="space-y-2 mb-6">
+<li><i class="fa-solid fa-check text-green-500 mr-2"></i>Monitor security systems</li>
+<li><i class="fa-solid fa-check text-green-500 mr-2"></i>Incident response</li>
+<li><i class="fa-solid fa-check text-green-500 mr-2"></i>Vulnerability assessment</li>
+<li><i class="fa-solid fa-check text-green-500 mr-2"></i>Security audits</li>
+</ul>
+<h3 class="text-xl font-semibold mb-3">Top Companies</h3>
+<div class="grid grid-cols-3 gap-4">
+<div class="bg-slate-50 p-4 rounded-xl text-center">Cisco</div>
+<div class="bg-slate-50 p-4 rounded-xl text-center">Palo Alto</div>
+<div class="bg-slate-50 p-4 rounded-xl text-center">CrowdStrike</div>
+</div>
+</div>
+<div class="tab-content bg-white rounded-2xl shadow-lg p-8" id="content-skills">
+<h2 class="text-2xl font-bold mb-6">Required Skills</h2>
+<div class="flex flex-wrap gap-2 mb-6">
+<span class="bg-red-100 text-red-700 px-4 py-2 rounded-full">Network Security</span>
+<span class="bg-red-100 text-red-700 px-4 py-2 rounded-full">Ethical Hacking</span>
+<span class="bg-red-100 text-red-700 px-4 py-2 rounded-full">Firewalls</span>
+<span class="bg-red-100 text-red-700 px-4 py-2 rounded-full">SIEM</span>
+<span class="bg-red-100 text-red-700 px-4 py-2 rounded-full">Python</span>
+</div>
+<h3 class="text-lg font-semibold mb-3">Certifications</h3>
+<div class="flex flex-wrap gap-2">
+<span class="bg-slate-100 px-4 py-2 rounded-full">CISSP</span>
+<span class="bg-slate-100 px-4 py-2 rounded-full">CEH</span>
+<span class="bg-slate-100 px-4 py-2 rounded-full">CompTIA Security+</span>
+</div>
+</div>
+<div class="tab-content bg-white rounded-2xl shadow-lg p-8" id="content-career">
+<h2 class="text-2xl font-bold mb-6">Career Progression</h2>
+<div class="border-l-4 border-red-200 ml-4 space-y-8">
+<div class="pl-8"><h3 class="font-semibold">Security Analyst (0-3 yrs)</h3><p class="text-slate-500">₹4-8 LPA</p></div>
+<div class="pl-8"><h3 class="font-semibold">Security Engineer (3-6 yrs)</h3><p class="text-slate-500">₹8-15 LPA</p></div>
+<div class="pl-8"><h3 class="font-semibold">Senior Security Engineer (6+ yrs)</h3><p class="text-slate-500">₹15-25 LPA</p></div>
+<div class="pl-8"><h3 class="font-semibold">CISO (10+ yrs)</h3><p class="text-slate-500">₹30-50+ LPA</p></div>
+</div>
+</div>
+</section>
+<footer class="bg-white py-6 text-center mt-12">
+<p class="text-slate-400">© 2026 CareerGuide</p>
+</footer>
+<script>
+function showTab(t) { document.querySelectorAll('.tab-btn').forEach(b=>{b.classList.remove('active');b.classList.add('bg-slate-100')});document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));document.getElementById('tab-'+t).classList.add('active');document.getElementById('content-'+t).classList.add('active'); }
+</script>
+</body>
+</html>
