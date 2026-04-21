@@ -586,6 +586,12 @@
 
     function showResults() {
         const score = calculateScore();
+        
+        // Save score to localStorage
+        if (typeof saveAssessmentScore === 'function') {
+            saveAssessmentScore('Logical Reasoning', score, totalQuestions);
+        }
+        
         document.getElementById('question-container').classList.add('hidden');
         document.getElementById('prev-btn').classList.add('hidden');
         document.getElementById('next-btn').classList.add('hidden');
@@ -629,6 +635,7 @@
     showQuestion(1);
 </script>
 
+<script src="main.js"></script>
 </body>
 </html>
 

@@ -596,6 +596,12 @@
 
     function showResults() {
         const score = calculateScore();
+        
+        // Save score to localStorage
+        if (typeof saveAssessmentScore === 'function') {
+            saveAssessmentScore('Banking Assessment', score, totalQuestions);
+        }
+        
         document.getElementById('question-container').classList.add('hidden');
         document.getElementById('prev-btn').classList.add('hidden');
         document.getElementById('next-btn').classList.add('hidden');
@@ -605,7 +611,7 @@
         document.getElementById('score').textContent = score;
         
         let message = '';
-        if (score >= 25) message = 'Excellent! You have great Banking knowledge!';
+        if (score >= 25) message = 'Excellent! You have great banking knowledge!';
         else if (score >= 20) message = 'Good job! Keep learning!';
         else if (score >= 15) message = 'Not bad! Room for improvement.';
         else message = 'Keep learning and try again!';
@@ -641,5 +647,6 @@
     showQuestion(1);
 </script>
 
+<script src="main.js"></script>
 </body>
 </html>
