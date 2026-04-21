@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Banking Assessment - CareerGuide</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+.nav-link { position: relative; transition: all 0.3s ease; font-weight: 600; font-size: 1.125rem; padding: 0.5rem 1rem; }
+.nav-link::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 3px; background: #0ea5e9; transition: width 0.3s ease; border-radius: 2px; }
+.nav-link:hover::after { width: 100%; }
+.nav-link:hover { color: #0ea5e9; text-shadow: 0 0 10px rgba(14, 165, 233, 0.3); transform: scale(1.05); }
+.nav-link.active { color: #0ea5e9; font-weight: 700; }
+.nav-link.active::after { width: 100%; background: linear-gradient(90deg, #0ea5e9, #38bdf8); box-shadow: 0 0 10px rgba(14, 165, 233, 0.5); }
+.nav-link-bg { transition: all 0.3s ease; }
+.nav-link-bg:hover { background: rgba(14, 165, 233, 0.1); border-radius: 0.5rem; }
+.btn-hover { transition: all 0.3s ease; }
+.btn-hover:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(14, 165, 233, 0.3); }
+.btn-hover:active { transform: scale(0.98); }
+
+.question-card {
+    transition: all 0.3s ease;
+}
+.question-card:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+.option-btn {
+    transition: all 0.2s ease;
+}
+.option-btn:hover {
+    border-color: #0ea5e9;
+    background: #f0f9ff;
+}
+.option-btn.selected {
+    border-color: #0ea5e9;
+    background: #e0f2fe;
+}
+.option-btn.correct {
+    border-color: #22c55e;
+    background: #dcfce7;
+}
+.option-btn.incorrect {
+    border-color: #ef4444;
+    background: #fee2e2;
+}
+</style>
+
+</head>
+
+<body class="bg-gradient-to-br from-blue-50 to-indigo-50 text-slate-800 min-h-screen">
+
+<!-- NAVBAR -->
+<nav class="flex justify-between items-center py-4 px-10 bg-white/95 backdrop-blur-md w-full z-50 border-b-2 border-sky-100 shadow-lg">
+<h1 class="text-2xl font-bold text-sky-600 tracking-wide">
+    <a href="index.html" class="hover:text-sky-500 transition-colors cursor-pointer">CareerGuide</a>
+</h1>
+<div class="flex items-center space-x-4">
+<a href="index.html" class="nav-link nav-link-bg text-slate-700 hover:text-sky-600 px-3 py-2"><span class="relative z-10">Home</span></a>
+<a href="career.html" class="nav-link nav-link-bg text-slate-700 hover:text-sky-600 px-3 py-2"><span class="relative z-10">Career Path</span></a>
+<a href="certificates.html" class="nav-link nav-link-bg text-slate-700 hover:text-sky-600 px-3 py-2"><span class="relative z-10">Certificates</span></a>
+<a href="assessment.html" class="nav-link nav-link-bg active text-sky-600 px-3 py-2"><span class="relative z-10">Assessment</span></a>
+<a href="about.html" class="nav-link nav-link-bg text-slate-700 hover:text-sky-600 px-3 py-2"><span class="relative z-10">About</span></a>
+</div>
+</nav>
+
+<!-- Header -->
+<div class="bg-gradient-to-r from-blue-500 to-indigo-600 py-6">
+    <div class="max-w-4xl mx-auto px-6">
+        <a href="assessment.html" class="inline-flex items-center text-white/80 hover:text-white transition-colors">
+            <i class="fa-solid fa-arrow-left mr-2"></i> Back to Assessment
+        </a>
+        <div class="flex items-center justify-between mt-4">
+            <div>
+                <h1 class="text-3xl font-bold text-white">
+                    <i class="fa-solid fa-building-columns mr-3"></i>Banking Assessment
+                </h1>
+                <p class="text-white/80 mt-1">30 Questions • Test your Banking knowledge</p>
+            </div>
+            <div class="text-white text-right">
+                <p class="text-sm opacity-80">Question</p>
+                <p class="text-3xl font-bold"><span id="current-q">1</span>/30</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Progress Bar -->
+<div class="bg-white shadow-sm">
+    <div class="max-w-4xl mx-auto px-6 py-3">
+        <div class="flex items-center justify-between text-sm text-slate-600 mb-2">
+            <span>Progress</span>
+            <span id="progress-percent">0%</span>
+        </div>
+        <div class="w-full bg-gray-200 rounded-full h-3">
+            <div id="progress-bar" class="bg-gradient-to-r from-blue-500 to-indigo-500 h-3 rounded-full transition-all duration-300" style="width: 0%"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Quiz Container -->
+<div class="max-w-4xl mx-auto px-6 py-8">
+
+    <!-- Question Card -->
+    <div id="question-container" class="bg-white rounded-2xl shadow-lg p-8 question-card">
+        
+        <!-- Question 1 -->
+        <div class="question" data-id="1">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-blue-100 text-blue-600 font-bold px-3 py-1 rounded-lg">Q1</span>
+                <h3 class="text-xl font-semibold text-slate-800">What does ATM stand for?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">Automatic Teller Machine</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Any Time Money</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Automated Transfer Machine</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Automatic Transfer Money</button>
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question hidden" data-id="2">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-blue-100 text-blue-600 font-bold px-3 py-1 rounded-lg">Q2</span>
+                <h3 class="text-xl font-semibold text-slate-800">RBI was established in which year?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">1930</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">1935</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">1947</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">1950</button>
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question hidden" data-id="3">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-blue-100 text-blue-600 font-bold px-3 py-1 rounded-lg">Q3</span>
+                <h3 class="text-xl font-semibold text-slate-800">Who is known as the father of Indian Banking?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Mahatma Gandhi</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Jawaharlal Nehru</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">Sir Sorabji Pochkhanawala</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Dr. B.R. Ambedkar</button>
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question hidden" data-id="4">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-blue-100 text-blue-600 font-bold px-3 py-1 rounded-lg">Q4</span>
+                <h3 class="text-xl font-semibold text-slate-800">What is CRR?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">Cash Reserve Ratio</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Credit Risk Ratio</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Capital Risk Ratio</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Cash Risk Rate</button>
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question hidden" data-id="5">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-blue-100 text-blue-600 font-bold px-3 py-1 rounded-lg">Q5</span>
+                <h3 class="text-xl font-semibold text-slate-800">What is SLR?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">Statutory Liquidity Ratio</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">System Liquidity Ratio</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Standard Loan Ratio</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Secure Lending Ratio</button>
+            </div>
+        </div>
+
+        <!-- Question 6 -->
+        <div class="question hidden" data-id="6">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-blue-100 text-blue-600 font-bold px-3 py-1 rounded-lg">Q6</span>
+                <h3 class="text-xl font-semibold text-slate-800">Which bank is called the banker's bank?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">SBI</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">RBI</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">PNB</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">ICICI</button>
+            </div>
+        </div>
+
+        <!-- Question 7 -->
+        <div class="question hidden" data-id="7">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-blue-100 text-blue-600 font-bold px-3 py-1 rounded-lg">Q7</span>
+                <h3 class="text-xl font-semibold text-slate-800">What is Repo Rate?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">Rate at which RBI lends money to banks</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Rate at which banks lend money to RBI</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Interest on savings account</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Loan repayment rate</button>
+            </div>
+        </div>
+
+        <!-- Question 8 -->
+        <div class="question hidden" data-id="8">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-blue-100 text-blue-600 font-bold px-3 py-1 rounded-lg">Q8</span>
+                <h3 class="text-xl font-semibold text-slate-800">What is Reverse Repo Rate?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">RBI borrows money from banks</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Banks borrow money from RBI</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Interest rate for loans</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Tax rate</button>
+            </div>
+        </div>
+
+        <!-- Question 9 -->
+        <div class="question hidden" data-id="9">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-blue-100 text-blue-600 font-bold px-3 py-1 rounded-lg">Q9</span>
+                <h3 class="text-xl font-semibold text-slate-800">What is NEFT?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">National Electronic Funds Transfer</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">New Economic Fund Transfer</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">National Exchange Fund Transfer</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">None</button>
+            </div>
+        </div>
+
+        <!-- Question 10 -->
+        <div class="question hidden" data-id="10">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-blue-100 text-blue-600 font-bold px-3 py-1 rounded-lg">Q10</span>
+                <h3 class="text-xl font-semibold text-slate-800">What is RTGS?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">Real Time Gross Settlement</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Rapid Transfer Global System</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Real Transfer Global System</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">None</button>
+            </div>
+        </div>
+
+        <!-- Question 11 -->
+        <div class="question hidden" data-id="11">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-blue-100 text-blue-600 font-bold px-3 py-1 rounded-lg">Q11</span>
+                <h3 class="text-xl font-semibold text-slate-800">What is the full form of IFSC?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">Indian Financial System Code</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">International Fund System Code</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Indian Fund Security Code</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">None</button>
+            </div>
+        </div>
+
+        <!-- Question 12 -->
+        <div class="question hidden" data-id="12">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-blue-100 text-blue-600 font-bold px-3 py-1 rounded-lg">Q12</span>
+                <h3 class="text-xl font-semibold text-slate-800">What is KYC?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">Know Your Customer</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Keep Your Cash</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Know Your Credit</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">None</button>
+            </div>
+        </div>
+
+        <!-- Question 13 -->
+        <div class="question hidden" data-id="13">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-blue-100 text-blue-600 font-bold px-3 py-1 rounded-lg">Q13</span>
+                <h3 class="text-xl font-semibold text-slate-800">What is a cheque?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Loan document</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">Written order to bank to pay money</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Insurance policy</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">None</button>
+            </div>
+        </div>
+
+        <!-- Question 14 -->
+        <div class="question hidden" data-id="14">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-blue-100 text-blue-600 font-bold px-3 py-1 rounded-lg">Q14</span>
+                <h3 class="text-xl font-semibold text-slate-800">What is overdraft?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Extra deposit</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">Withdrawal beyond balance</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Fixed deposit</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">None</button>
+            </div>
+        </div>
+
+        <!-- Question 15 -->
+        <div class="question hidden" data-id="15">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-blue-100 text-blue-600 font-bold px-3 py-1 rounded-lg">Q15</span>
+                <h3 class="text-xl font-semibold text-slate-800">What is a fixed deposit?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">Deposit for fixed time</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Daily deposit</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Loan</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">None</button>
+            </div>
+        </div>
+
+        <!-- Question 16 -->
+        <div class="question hidden" data-id="16">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-blue-100 text-blue-600 font-bold px-3 py-1 rounded-lg">Q16</span>
+                <h3 class="text-xl font-semibold text-slate-800">What is inflation?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">Increase in prices</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Decrease in prices</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Stable prices</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">None</button>
+            </div>
+        </div>
+
+        <!-- Question 17 -->
+        <div class="question hidden" data-id="17">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-blue-100 text-blue-600 font-bold px-3 py-1 rounded-lg">Q17</span>
+                <h3 class="text-xl font-semibold text-slate-800">What is deflation?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Increase in prices</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">Decrease in prices</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">No change</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">None</button>
+            </div>
+        </div>
+
+        <!-- Question 18 -->
+        <div class="question hidden" data-id="18">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-blue-100 text-blue-600 font-bold px-3 py-1 rounded-lg">Q18</span>
+                <h3 class="text-xl font-semibold text-slate-800">What is a savings account?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">For daily expenses</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">For saving money</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Loan account</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">None</button>
+            </div>
+        </div>
+
+        <!-- Question 19 -->
+        <div class="question hidden" data-id="19">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-blue-100 text-blue-600 font-bold px-3 py-1 rounded-lg">Q19</span>
+                <h3 class="text-xl font-semibold text-slate-800">What is a current account?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">For business transactions</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">For saving</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Fixed account</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">None</button>
+            </div>
+        </div>
+
+        <!-- Question 20 -->
+        <div class="question hidden" data-id="20">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-blue-100 text-blue-600 font-bold px-3 py-1 rounded-lg">Q20</span>
+                <h3 class="text-xl font-semibold text-slate-800">What is a debit card?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Borrow money</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">Pay using bank balance</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Credit money</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">None</button>
+            </div>
+        </div>
+
+        <!-- Question 21 -->
+        <div class="question hidden" data-id="21">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-blue-100 text-blue-600 font-bold px-3 py-1 rounded-lg">Q21</span>
+                <h3 class="text-xl font-semibold text-slate-800">What is a credit card?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">Pay using borrowed money</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Use own money</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Fixed deposit</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">None</button>
+            </div>
+        </div>
+
+        <!-- Question 22 -->
+        <div class="question hidden" data-id="22">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-blue-100 text-blue-600 font-bold px-3 py-1 rounded-lg">Q22</span>
+                <h3 class="text-xl font-semibold text-slate-800">What is NPA?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">Non-Performing Asset</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Net Profit Account</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">National Payment Account</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">None</button>
+            </div>
+        </div>
+
+        <!-- Question 23 -->
+        <div class="question hidden" data-id="23">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-blue-100 text-blue-600 font-bold px-3 py-1 rounded-lg">Q23</span>
+                <h3 class="text-xl font-semibold text-slate-800">What is MICR?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">Magnetic Ink Character Recognition</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Money Identification Code Rate</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Machine Input Code Rule</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">None</button>
+            </div>
+        </div>
+
+        <!-- Question 24 -->
+        <div class="question hidden" data-id="24">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-blue-100 text-blue-600 font-bold px-3 py-1 rounded-lg">Q24</span>
+                <h3 class="text-xl font-semibold text-slate-800">What is SWIFT?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">Global messaging system for banks</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Loan system</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Tax system</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">None</button>
+            </div>
+        </div>
+
+        <!-- Question 25 -->
+        <div class="question hidden" data-id="25">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-blue-100 text-blue-600 font-bold px-3 py-1 rounded-lg">Q25</span>
+                <h3 class="text-xl font-semibold text-slate-800">What is mobile banking?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">Banking through phone</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Banking in branch</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Cash deposit</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">None</button>
+            </div>
+        </div>
+
+        <!-- Question 26 -->
+        <div class="question hidden" data-id="26">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-blue-100 text-blue-600 font-bold px-3 py-1 rounded-lg">Q26</span>
+                <h3 class="text-xl font-semibold text-slate-800">What is internet banking?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">Banking through internet</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Banking in ATM</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Loan system</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">None</button>
+            </div>
+        </div>
+
+        <!-- Question 27 -->
+        <div class="question hidden" data-id="27">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-blue-100 text-blue-600 font-bold px-3 py-1 rounded-lg">Q27</span>
+                <h3 class="text-xl font-semibold text-slate-800">What is UPI?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">Unified Payments Interface</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Universal Payment India</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Unique Payment Interface</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">None</button>
+            </div>
+        </div>
+
+        <!-- Question 28 -->
+        <div class="question hidden" data-id="28">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-blue-100 text-blue-600 font-bold px-3 py-1 rounded-lg">Q28</span>
+                <h3 class="text-xl font-semibold text-slate-800">What is IMPS?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">Immediate Payment Service</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Instant Money Payment System</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Internal Payment System</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">None</button>
+            </div>
+        </div>
+
+        <!-- Question 29 -->
+        <div class="question hidden" data-id="29">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-blue-100 text-blue-600 font-bold px-3 py-1 rounded-lg">Q29</span>
+                <h3 class="text-xl font-semibold text-slate-800">What is a loan?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">Borrowed money</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Saved money</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Invested money</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">None</button>
+            </div>
+        </div>
+
+        <!-- Question 30 -->
+        <div class="question hidden" data-id="30">
+            <div class="flex items-start space-x-4 mb-6">
+                <span class="bg-blue-100 text-blue-600 font-bold px-3 py-1 rounded-lg">Q30</span>
+                <h3 class="text-xl font-semibold text-slate-800">What is interest?</h3>
+            </div>
+            <div class="space-y-3">
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="true">Extra money earned/paid on money</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Loan amount</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">Deposit</button>
+                <button class="option-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 font-medium" data-correct="false">None</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="flex justify-between mt-8">
+        <button id="prev-btn" class="hidden px-6 py-3 bg-gray-200 hover:bg-gray-300 rounded-xl font-semibold transition btn-hover">
+            <i class="fa-solid fa-arrow-left mr-2"></i> Previous
+        </button>
+        <button id="next-btn" class="ml-auto px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-xl font-semibold transition btn-hover">
+            Next <i class="fa-solid fa-arrow-right ml-2"></i>
+        </button>
+        <button id="submit-btn" class="hidden ml-auto px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-xl font-semibold transition btn-hover">
+            Submit <i class="fa-solid fa-check ml-2"></i>
+        </button>
+    </div>
+
+    <!-- Results Section (Hidden initially) -->
+    <div id="results" class="hidden bg-white rounded-2xl shadow-lg p-8 text-center">
+        <div class="mb-6">
+            <div class="w-24 h-24 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fa-solid fa-trophy text-4xl text-white"></i>
+            </div>
+            <h2 class="text-3xl font-bold text-slate-800">Assessment Complete!</h2>
+            <p class="text-slate-600 mt-2">Here's your score</p>
+        </div>
+        <div class="text-6xl font-bold text-blue-600 mb-2"><span id="score">0</span>/30</div>
+        <p class="text-slate-500 mb-6" id="score-message">Great effort!</p>
+        <div class="flex justify-center gap-4">
+            <a href="banking-assessment.html" class="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-xl font-semibold transition btn-hover">
+                <i class="fa-solid fa-redo mr-2"></i> Retry
+            </a>
+            <a href="assessment.html" class="px-6 py-3 bg-indigo-500 hover:bg-indigo-600 text-white rounded-xl font-semibold transition btn-hover">
+                Back to Assessment <i class="fa-solid fa-arrow-right ml-2"></i>
+            </a>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    let currentQuestion = 1;
+    const totalQuestions = 30;
+    let answers = {};
+
+    function showQuestion(num) {
+        document.querySelectorAll('.question').forEach(q => q.classList.add('hidden'));
+        document.querySelector(`.question[data-id="${num}"]`).classList.remove('hidden');
+        document.getElementById('current-q').textContent = num;
+        
+        const progress = ((num - 1) / totalQuestions) * 100;
+        document.getElementById('progress-bar').style.width = progress + '%';
+        document.getElementById('progress-percent').textContent = Math.round(progress) + '%';
+        
+        document.getElementById('prev-btn').classList.toggle('hidden', num === 1);
+        document.getElementById('next-btn').classList.toggle('hidden', num === totalQuestions);
+        document.getElementById('submit-btn').classList.toggle('hidden', num !== totalQuestions);
+    }
+
+    function calculateScore() {
+        let score = 0;
+        document.querySelectorAll('.question').forEach(q => {
+            const qId = q.dataset.id;
+            const selected = q.querySelector('.selected');
+            if (selected && selected.dataset.correct === 'true') {
+                score++;
+            }
+        });
+        return score;
+    }
+
+    function showResults() {
+        const score = calculateScore();
+        document.getElementById('question-container').classList.add('hidden');
+        document.getElementById('prev-btn').classList.add('hidden');
+        document.getElementById('next-btn').classList.add('hidden');
+        document.getElementById('submit-btn').classList.add('hidden');
+        document.getElementById('results').classList.remove('hidden');
+        
+        document.getElementById('score').textContent = score;
+        
+        let message = '';
+        if (score >= 25) message = 'Excellent! You have great Banking knowledge!';
+        else if (score >= 20) message = 'Good job! Keep learning!';
+        else if (score >= 15) message = 'Not bad! Room for improvement.';
+        else message = 'Keep learning and try again!';
+        document.getElementById('score-message').textContent = message;
+    }
+
+    document.querySelectorAll('.option-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const parent = this.closest('.question');
+            parent.querySelectorAll('.option-btn').forEach(b => {
+                b.classList.remove('selected', 'correct', 'incorrect');
+            });
+            this.classList.add('selected');
+        });
+    });
+
+    document.getElementById('prev-btn').addEventListener('click', () => {
+        if (currentQuestion > 1) {
+            currentQuestion--;
+            showQuestion(currentQuestion);
+        }
+    });
+
+    document.getElementById('next-btn').addEventListener('click', () => {
+        if (currentQuestion < totalQuestions) {
+            currentQuestion++;
+            showQuestion(currentQuestion);
+        }
+    });
+
+    document.getElementById('submit-btn').addEventListener('click', showResults);
+
+    showQuestion(1);
+</script>
+
+</body>
+</html>
