@@ -564,7 +564,7 @@
         document.querySelector(`.question[data-id="${num}"]`).classList.remove('hidden');
         document.getElementById('current-q').textContent = num;
         
-        const progress = ((num - 1) / totalQuestions) * 100;
+        const progress = (num / totalQuestions) * 100;
         document.getElementById('progress-bar').style.width = progress + '%';
         document.getElementById('progress-percent').textContent = Math.round(progress) + '%';
         
