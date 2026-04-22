@@ -11,19 +11,21 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-// Serve static files from public (EXPLICIT absolute path)
-app.use(express.static(path.join(__dirname, "public")))
+// Get project root (works in both Vercel and local)
+const projectRoot = process.cwd()
+
+// Serve static files from public folder
+app.use(express.static(path.join(projectRoot, "public")))
 
 // API routes
 app.use("/api", authRoutes)
 
-// HTML page routes (for clean URLs like /assessment → assessment.html)
+// HTML page routes (clean URLs)
 app.get("/:page", (req, res, next) => {
   const page = req.params.page
-  // Skip if has file extension (static files already handled)
   if (page.includes('.')) return next()
   
-  const filePath = path.join(__dirname, "public", page + ".html")
+  const filePath = path.join(projectRoot, "public", page + ".html")
   res.sendFile(filePath, (err) => {
     if (err) next()
   })
@@ -31,7 +33,7 @@ app.get("/:page", (req, res, next) => {
 
 // Root route
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"))
+  res.sendFile(path.join(projectRoot, "public", "index.html"))
 })
 
 // MongoDB
