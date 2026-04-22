@@ -11,10 +11,37 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
+// Serve static files from public (images, CSS, JS, HTML)
+app.use(express.static("public"))
+
 // API routes
 app.use("/api", authRoutes)
 
-// MongoDB
+// Clean URL routing: /about → /public/about.html
+app.get("/:page", (req, res, next) => {
+  const page = req.params.page
+  
+  // Skip if already has extension (static middleware handled it)
+  if (page.includes('.')) {
+    return next()
+  }
+  
+  // Try serving corresponding HTML file
+  const filePath = __dirname + "/public/" + page + ".html"
+  res.sendFile(filePath, (err) => {
+    if (err) {
+      // If HTML file not found, return 404
+      res.status(404).send('Page not found')
+    }
+  })
+})
+
+// Root route
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/public/index.html")
+})
+
+// MongoDB - lazy connect
 let dbReady = false
 const connectDB = async () => {
   if (dbReady) return true
@@ -33,44 +60,31 @@ const connectDB = async () => {
   }
 }
 
+// Ensure DB before API requests
 app.use("/api", async (req, res, next) => {
   if (!dbReady) {
     const ok = await connectDB()
-    if (!ok) return res.status(503).json({ error: "DB unavailable" })
+    if (!ok) return res.status(503).json({ error: "Database unavailable" })
   }
   next()
 })
 
+// Error handler
 app.use((err, req, res, next) => {
-  console.error(err.stack)
-  res.status(500).json({ error: "Server error" })
+  console.error("Error:", err.stack)
+  res.status(500).json({ error: "Internal server error" })
 })
 
 module.exports = app
 
+// Development server
 if (!process.env.VERCEL) {
   const PORT = process.env.PORT || 3000
-  app.use(express.static("public"))
   
-  // Clean URLs for dev
-  app.get("/:page", (req, res, next) => {
-    const page = req.params.page
-    if (!page.includes('.')) {
-      res.sendFile(__dirname + "/public/" + page + ".html", (err) => {
-        if (err) next()
-      })
-    } else {
-      next()
-    }
-  })
-  
-  app.get("/", (req, res) => {
-    res.sendFile(__dirname + "/public/index.html")
-  })
-  
+  // Connect DB in dev
   connectDB().catch(console.error)
   
   app.listen(PORT, () => {
-    console.log(`Dev: http://localhost:${PORT}`)
+    console.log(`Dev server: http://localhost:${PORT}`)
   })
 }
