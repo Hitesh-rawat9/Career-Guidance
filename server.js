@@ -12,6 +12,11 @@ app.use(bodyParser.json())
 app.use(express.static("public"))
 app.use(express.urlencoded({extended:true}))
 
+// Serve index.html at root route
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/public/index.html")
+})
+
 // MongoDB connection with options for Vercel/reconnection handling
 const mongoURI = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/career_guidance"
 
