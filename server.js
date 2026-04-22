@@ -14,64 +14,6 @@ app.use(express.urlencoded({ extended: true }))
 // Serve static files
 app.use(express.static(path.join(__dirname, "public")))
 
-// MongoDB connection state
-let dbReady = false
-
-const connectDB = async () => {
-  if (dbReady) return true
-  
-  const mongoURI = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/career_guidance"
-  console.log("🔌 Connecting to MongoDB...")
-  console.log("   URI (masked):", mongoURI.replace(/\/\/[^@]*@/, "//***:***@"))
-  
-  try {
-    await mongoose.connect(mongoURI, {
-      serverSelectionTimeoutMS: 10000,   // 10s
-      socketTimeoutMS: 15000,            // 15s
-      connectTimeoutMS: 10000,           // 10s
-      maxPoolSize: 3,
-      minPoolSize: 0,
-    })
-    dbReady = true
-    console.log("✅ MongoDB connected")
-    return true
-  } catch (err) {
-    console.error("❌ MongoDB connection error:", err.message)
-    console.error("   Full error:", err)
-    
-    if (err.message.includes('Authentication failed')) {
-      console.error("   → AUTH FAILED: Check username/password in connection string")
-    } else if (err.message.includes('ENOTFOUND')) {
-      console.error("   → DNS ERROR: Check cluster hostname")
-    } else if (err.message.includes('ETIMEDOUT') || err.message.includes('timed out')) {
-      console.error("   → TIMEOUT: Cluster may be unreachable (check IP whitelist)")
-    }
-    
-    return false
-  }
-}
-
-// Ensure DB is ready BEFORE handling API requests
-app.use("/api", async (req, res, next) => {
-  if (!dbReady) {
-    console.log("DB not ready, connecting now...")
-    const connected = await connectDB()
-    if (!connected) {
-      console.log("DB connection FAILED - returning 503")
-      return res.status(503).json({ 
-        success: false,
-        error: "Database connection failed",
-        message: "Cannot connect to MongoDB. Please check server logs for details." 
-      })
-    }
-    console.log("DB connected, proceeding with request")
-  }
-  next()
-})
-
-// API routes (after DB middleware)
-app.use("/api", authRoutes)
-
 // Root route
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"))
@@ -88,19 +30,98 @@ app.get("/:page", (req, res) => {
   })
 })
 
-// Error handler - expose errors in dev
+// MongoDB connection state
+let isConnected = false
+let connectionPromise = null
+
+const connectDB = async () => {
+  // If already connected, return immediately
+  if (isConnected) {
+    console.log("✅ Already connected to MongoDB")
+    return true
+  }
+  
+  // If a connection attempt is in progress, wait for it
+  if (connectionPromise) {
+    console.log("⏳ Waiting for existing connection attempt...")
+    return connectionPromise
+  }
+  
+  const mongoURI = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/career_guidance"
+  console.log("🔌 Initializing MongoDB connection...")
+  console.log("   URI:", mongoURI.replace(/\/\/[^@]*@/, "//***:***@"))
+  
+  // Start connection attempt
+  connectionPromise = new Promise(async (resolve, reject) => {
+    try {
+      await mongoose.connect(mongoURI, {
+        serverSelectionTimeoutMS: 10000,   // 10s
+        socketTimeoutMS: 15000,            // 15s
+        connectTimeoutMS: 10000,           // 10s
+        maxPoolSize: 3,
+        minPoolSize: 0,
+      })
+      
+      isConnected = true
+      console.log("✅ MongoDB connected successfully")
+      resolve(true)
+    } catch (err) {
+      console.error("❌ MongoDB connection failed:", err.message)
+      console.error("   Error details:", {
+        code: err.code,
+        name: err.name,
+        stack: err.stack.substring(0, 200)
+      })
+      isConnected = false
+      connectionPromise = null
+      reject(err)
+    }
+  })
+  
+  return connectionPromise
+}
+
+// Middleware to ensure DB is connected before API requests
+app.use("/api", async (req, res, next) => {
+  try {
+    if (!isConnected) {
+      console.log(`[${req.method}] ${req.path} - DB not connected, attempting connection...`)
+      
+      try {
+        await connectDB()
+        console.log(`[${req.method}] ${req.path} - DB ready, processing request`)
+      } catch (err) {
+        console.log(`[${req.method}] ${req.path} - DB connection failed`)
+        return res.status(503).json({ 
+          success: false,
+          error: "Database unavailable",
+          message: "Cannot connect to MongoDB. Please try again later." 
+        })
+      }
+    }
+    next()
+  } catch (err) {
+    console.error("Middleware error:", err)
+    next(err)
+  }
+})
+
+// API routes
+app.use("/api", authRoutes)
+
+// Error handler - log all errors
 app.use((err, req, res, next) => {
-  console.error("Unhandled error:", {
-    error: err.message,
-    stack: err.stack,
+  console.error("Unhandled error in request:", {
     url: req.url,
-    method: req.method
+    method: req.method,
+    error: err.message,
+    stack: err.stack.substring(0, 300)
   })
   
   res.status(500).json({ 
     success: false,
     error: "Internal server error",
-    message: process.env.NODE_ENV === 'development' ? err.message : "Please try again later"
+    message: process.env.NODE_ENV === 'development' ? err.message : undefined
   })
 })
 
@@ -110,12 +131,12 @@ module.exports = app
 if (!process.env.VERCEL) {
   const PORT = process.env.PORT || 3000
   
-  // Connect DB on dev startup
+  // Pre-connect in dev
   connectDB().catch(err => {
-    console.error("Failed to connect to MongoDB:", err.message)
+    console.error("Failed to connect to MongoDB in dev:", err.message)
   })
   
   app.listen(PORT, () => {
-    console.log(`🚀 Dev: http://localhost:${PORT}`)
+    console.log(`🚀 Dev server: http://localhost:${PORT}`)
   })
 }
