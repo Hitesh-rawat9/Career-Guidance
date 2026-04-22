@@ -48,18 +48,26 @@ app.get("/", (req, res) => {
 // MongoDB
 let dbReady = false
 const connectDB = async () => {
-  if (dbReady) return true
+  if (dbReady) {
+    console.log("DB already connected")
+    return true
+  }
+  
   const mongoURI = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/career_guidance"
+  console.log("Attempting DB connection to:", mongoURI.replace(/\/\/.*@/, "//***:***@")) // Hide credentials
+  
   try {
     await mongoose.connect(mongoURI, {
       serverSelectionTimeoutMS: 30000,
       socketTimeoutMS: 60000,
     })
     dbReady = true
-    console.log("✅ MongoDB connected")
+    console.log("✅ MongoDB connected successfully")
     return true
   } catch (err) {
-    console.error("❌ MongoDB error:", err.message)
+    console.error("❌ MongoDB connection error:", err.message)
+    console.error("Full error:", err)
+    dbReady = false
     return false
   }
 }
@@ -67,8 +75,16 @@ const connectDB = async () => {
 // Ensure DB for API
 app.use("/api", async (req, res, next) => {
   if (!dbReady) {
+    console.log("DB not ready, attempting connection...")
     const ok = await connectDB()
-    if (!ok) return res.status(503).json({ error: "Database unavailable" })
+    if (!ok) {
+      console.log("DB connection failed")
+      return res.status(503).json({ 
+        error: "Database unavailable",
+        message: "Cannot connect to MongoDB. Check connection string."
+      })
+    }
+    console.log("DB connected, proceeding with request")
   }
   next()
 })
