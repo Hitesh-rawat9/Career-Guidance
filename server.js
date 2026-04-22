@@ -12,24 +12,29 @@ app.use(bodyParser.json())
 app.use(express.static("public"))
 app.use(express.urlencoded({extended:true}))
 
-// Serve index.html at root route
+// Serve API routes first (before catch-all page routes)
+app.use("/api",authRoutes)
+
+// Root route
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/public/index.html")
 })
 
-// Serve HTML pages from public folder
+// Clean URLs for HTML pages (e.g., /contact → /contact.html)
 app.get("/:page", (req, res) => {
   const page = req.params.page
-  const filePath = __dirname + "/public/" + page + ".html"
-  res.sendFile(filePath, (err) => {
+  // Don't intercept API routes
+  if (page === 'api') {
+    return res.status(404).send('Not found')
+  }
+  res.sendFile(__dirname + "/public/" + page + ".html", (err) => {
     if (err) {
-      // If file not found, send index.html (for SPA fallback)
-      res.sendFile(__dirname + "/public/index.html")
+      res.status(404).send('Page not found')
     }
   })
 })
 
-// MongoDB connection with options for Vercel/reconnection handling
+// Export for Vercel serverless
 const mongoURI = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/career_guidance"
 
 const connectDB = async () => {
