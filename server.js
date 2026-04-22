@@ -1,8 +1,8 @@
 const express = require("express")
 const mongoose = require("mongoose")
 const cors = require("cors")
-
 const authRoutes = require("./routes/auth")
+const path = require("path")
 
 const app = express()
 
@@ -11,8 +11,28 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-// API routes (must come BEFORE static to avoid conflicts)
+// Serve static files from public (EXPLICIT absolute path)
+app.use(express.static(path.join(__dirname, "public")))
+
+// API routes
 app.use("/api", authRoutes)
+
+// HTML page routes (for clean URLs like /assessment → assessment.html)
+app.get("/:page", (req, res, next) => {
+  const page = req.params.page
+  // Skip if has file extension (static files already handled)
+  if (page.includes('.')) return next()
+  
+  const filePath = path.join(__dirname, "public", page + ".html")
+  res.sendFile(filePath, (err) => {
+    if (err) next()
+  })
+})
+
+// Root route
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"))
+})
 
 // MongoDB
 let dbReady = false
@@ -33,7 +53,7 @@ const connectDB = async () => {
   }
 }
 
-// DB middleware for API
+// Ensure DB for API
 app.use("/api", async (req, res, next) => {
   if (!dbReady) {
     const ok = await connectDB()
@@ -44,38 +64,16 @@ app.use("/api", async (req, res, next) => {
 
 // Error handler
 app.use((err, req, res, next) => {
-  console.error("Error:", err.stack)
+  console.error(err.stack)
   res.status(500).json({ error: "Internal server error" })
 })
 
 module.exports = app
 
-// Development server
+// Development only
 if (!process.env.VERCEL) {
   const PORT = process.env.PORT || 3000
-  
-  // Static files
-  app.use(express.static("public"))
-  
-  // Root
-  app.get("/", (req, res) => {
-    res.sendFile(__dirname + "/public/index.html")
-  })
-  
-  // Clean URLs for HTML pages
-  app.get("/:page", (req, res, next) => {
-    const page = req.params.page
-    if (!page.includes('.')) {
-      res.sendFile(__dirname + "/public/" + page + ".html", (err) => {
-        if (err) next()
-      })
-    } else {
-      next()
-    }
-  })
-  
   connectDB().catch(console.error)
-  
   app.listen(PORT, () => {
     console.log(`Dev: http://localhost:${PORT}`)
   })
