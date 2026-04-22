@@ -14,58 +14,50 @@ app.use(express.urlencoded({extended:true}))
 // API routes
 app.use("/api", authRoutes)
 
-// Lazy MongoDB connection - only connect when needed
-let dbPromise = null
+// MongoDB - lazy connection for serverless
+let dbReady = false
 
 const connectDB = async () => {
-  if (dbPromise) return dbPromise
+  if (dbReady) return
   
   const mongoURI = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/career_guidance"
   
-  dbPromise = mongoose.connect(mongoURI, {
-    serverSelectionTimeoutMS: 5000,
-    socketTimeoutMS: 45000,
-  })
-  
   try {
-    await dbPromise
-    console.log("Connected to MongoDB")
+    await mongoose.connect(mongoURI, {
+      serverSelectionTimeoutMS: 5000,
+      socketTimeoutMS: 45000,
+    })
+    dbReady = true
+    console.log("MongoDB connected")
   } catch (err) {
-    console.error("MongoDB connection error:", err.message)
-    dbPromise = null
+    console.error("MongoDB error:", err.message)
+    dbReady = false
     throw err
   }
-  
-  return dbPromise
 }
 
-// Middleware to ensure DB is connected before API routes
+// Ensure DB before API requests
 app.use("/api", async (req, res, next) => {
-  try {
-    if (!dbPromise) {
+  if (!dbReady) {
+    try {
       await connectDB()
+    } catch (err) {
+      return res.status(500).json({ error: "Database unavailable" })
     }
-    next()
-  } catch (err) {
-    res.status(500).json({ error: "Database connection failed" })
   }
+  next()
 })
 
-// Export for Vercel
 module.exports = app
 
-// Local development server
-if (process.env.NODE_ENV !== 'production' && !process.env.VERCEL) {
+// Development server only
+if (!process.env.VERCEL) {
   const PORT = process.env.PORT || 3000
   
-  // Serve static files
+  // Static files
   app.use(express.static("public"))
   
-  // Routes
-  app.get("/", (req, res) => {
-    res.sendFile(__dirname + "/public/index.html")
-  })
-  
+  // Clean URL support for dev
   app.get("/:page", (req, res, next) => {
     const page = req.params.page
     if (!page.includes('.')) {
@@ -77,10 +69,10 @@ if (process.env.NODE_ENV !== 'production' && !process.env.VERCEL) {
     }
   })
   
-  // Connect DB in dev
+  // Connect DB
   connectDB().catch(console.error)
   
   app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`)
+    console.log(`Dev server: http://localhost:${PORT}`)
   })
 }
