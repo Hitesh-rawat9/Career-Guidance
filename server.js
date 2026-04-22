@@ -33,50 +33,119 @@ app.get("/:page", (req, res) => {
   })
 })
 
-// MongoDB connection
+// MongoDB - use global cached connection
+let cachedConnection = null
+
 const connectDB = async () => {
-  const mongoURI = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/career_guidance"
+  // Return existing connection if already connected
+  if (cachedConnection && mongoose.connection.readyState === 1) {
+    console.log("✅ Using existing DB connection")
+    return true
+  }
   
-  console.log(" MongoDB connecting...")
+  const mongoURI = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/career_guidance"
+  console.log("🔌 New DB connection attempt...")
   
   try {
+    // Close any existing stale connection
+    if (mongoose.connection.readyState !== 0) {
+      await mongoose.connection.close()
+    }
+    
     await mongoose.connect(mongoURI, {
-      serverSelectionTimeoutMS: 30000,
-      socketTimeoutMS: 60000,
-      connectTimeoutMS: 30000,
+      serverSelectionTimeoutMS: 15000,    // 15s server selection
+      socketTimeoutMS: 30000,             // 30s socket timeout
+      connectTimeoutMS: 15000,            // 15s connect timeout
+      maxPoolSize: 5,                     // Limit pool size for serverless
+      minPoolSize: 0,                     // No minimum to release connections
+      // Use faster DNS resolution
+      directConnection: true,
+      // No keepAlive options in Mongoose 9
     })
-    console.log("✅ MongoDB connected")
+    
+    cachedConnection = mongoose.connection
+    console.log("✅ MongoDB connected successfully")
     return true
+    
   } catch (err) {
-    console.error("❌ MongoDB connection error:", err.message)
-    console.error("   Full error:", err)
+    console.error("❌ MongoDB connection failed:", err.message)
+    
+    // More helpful error messages
+    if (err.message.includes('ENOTFOUND') || err.message.includes('getaddrinfo')) {
+      console.error("   → DNS resolution failed. Check:")
+      console.error("     - Connection string hostname is correct")
+      console.error("     - Internet connectivity")
+    } else if (err.message.includes('ECONNREFUSED')) {
+      console.error("   → Connection refused. Check:")
+      console.error("     - MongoDB Atlas cluster is running")
+      console.error("     - IP whitelist includes Vercel IPs (0.0.0.0/0)")
+    } else if (err.message.includes('Authentication failed')) {
+      console.error("   → Authentication failed. Check:")
+      console.error("     - Username/password in connection string")
+      console.error("     - Database user has readWrite role")
+    } else if (err.message.includes('timed out') || err.message.includes('ETIMEDOUT')) {
+      console.error("   → Connection timed out. Check:")
+      console.error("     - Atlas cluster is in a region near Vercel")
+      console.error("     - IP whitelist (0.0.0.0/0)")
+      console.error("     - Cluster is not paused")
+    }
+    
     return false
   }
 }
 
-// Connect immediately on cold start (not lazy)
-let dbReady = false
+// Lazy connect on first API request (with retry)
+let dbRetryCount = 0
+const maxRetries = 2
 
-// Wrap all API routes with DB check
 app.use("/api", async (req, res, next) => {
-  if (!dbReady) {
-    console.log("DB not ready, attempting connection...")
-    dbReady = await connectDB()
-    if (!dbReady) {
-      console.log("DB connection failed - returning 503")
+  if (!cachedConnection || mongoose.connection.readyState !== 1) {
+    console.log(`[${req.method}] ${req.path} - DB not connected, connecting...`)
+    
+    const success = await connectDB()
+    
+    if (!success && dbRetryCount < maxRetries) {
+      dbRetryCount++
+      console.log(`Retrying DB connection (${dbRetryCount}/${maxRetries})...`)
+      // Quick retry
+      setTimeout(async () => {
+        const retrySuccess = await connectDB()
+        if (retrySuccess) {
+          dbRetryCount = 0
+          return next()
+        }
+      }, 1000)
       return res.status(503).json({ 
-        error: "Database connection failed",
-        message: "Please try again later. If problem persists, contact support."
+        error: "Database unavailable",
+        message: "Connection attempt failed, retrying..." 
       })
     }
+    
+    if (!success) {
+      return res.status(503).json({ 
+        error: "Database unavailable",
+        message: "Cannot connect to MongoDB. Check Vercel logs for details." 
+      })
+    }
+    
+    dbRetryCount = 0
   }
   next()
 })
 
 // Error handler
 app.use((err, req, res, next) => {
-  console.error("Server error:", err)
-  res.status(500).json({ error: "Internal server error" })
+  console.error("Unhandled error:", {
+    error: err.message,
+    stack: err.stack,
+    url: req.url,
+    method: req.method
+  })
+  
+  res.status(500).json({ 
+    error: "Internal server error",
+    ...(process.env.NODE_ENV === 'development' && { details: err.message })
+  })
 })
 
 module.exports = app
@@ -86,9 +155,10 @@ if (!process.env.VERCEL) {
   const PORT = process.env.PORT || 3000
   
   // Connect DB in dev
-  connectDB()
+  connectDB().catch(console.error)
   
   app.listen(PORT, () => {
-    console.log(`🚀 Dev: http://localhost:${PORT}`)
+    console.log(`🚀 Dev server: http://localhost:${PORT}`)
+    console.log(`📁 Serving files from: ${path.join(__dirname, "public")}`)
   })
 }
