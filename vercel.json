@@ -12,13 +12,21 @@
       "dest": "/server.js"
     },
     {
-      "src": "/(.*).(png|jpg|jpeg|gif|webp|css|js|ico|svg)",
-      "dest": "/public/$1.$2"
-    },
-    {
       "src": "/(.*)",
-      "dest": "/server.js"
+      "dest": "/public/$1"
     }
   ],
   "cleanUrls": true
+}
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/server.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/public/$1"
+    }
+  ]
 }

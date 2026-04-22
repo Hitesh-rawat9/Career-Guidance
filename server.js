@@ -46,20 +46,24 @@ module.exports = app
 if (process.env.NODE_ENV !== 'production' && !process.env.VERCEL) {
   const PORT = process.env.PORT || 3000
   
-  // Serve static files
+  // Serve static files in dev (Vercel does this in production)
   app.use(express.static("public"))
   
-  // HTML pages
+  // Explicit root route for dev
   app.get("/", (req, res) => {
     res.sendFile(__dirname + "/public/index.html")
   })
   
-  app.get("/:page", (req, res) => {
+  // Clean URL support for dev
+  app.get("/:page", (req, res, next) => {
     const page = req.params.page
-    if (page.includes('.')) return res.status(404).send('Not found')
-    res.sendFile(__dirname + "/public/" + page + ".html", (err) => {
-      if (err) res.status(404).send('Not found')
-    })
+    if (!page.includes('.')) {
+      res.sendFile(__dirname + "/public/" + page + ".html", (err) => {
+        if (err) next()
+      })
+    } else {
+      next()
+    }
   })
   
   app.listen(PORT, () => {
