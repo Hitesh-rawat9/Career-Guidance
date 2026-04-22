@@ -12,8 +12,13 @@
       "dest": "/server.js"
     },
     {
+      "src": "/(.*).(png|jpg|jpeg|gif|webp|css|js|ico|svg)",
+      "dest": "/public/$1.$2"
+    },
+    {
       "src": "/(.*)",
       "dest": "/server.js"
     }
-  ]
+  ],
+  "cleanUrls": true
 }
