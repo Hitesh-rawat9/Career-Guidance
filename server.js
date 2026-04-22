@@ -53,14 +53,11 @@ const connectDB = async () => {
     }
     
     await mongoose.connect(mongoURI, {
-      serverSelectionTimeoutMS: 15000,    // 15s server selection
-      socketTimeoutMS: 30000,             // 30s socket timeout
-      connectTimeoutMS: 15000,            // 15s connect timeout
-      maxPoolSize: 5,                     // Limit pool size for serverless
-      minPoolSize: 0,                     // No minimum to release connections
-      // Use faster DNS resolution
-      directConnection: true,
-      // No keepAlive options in Mongoose 9
+      serverSelectionTimeoutMS: 10000,   // 10s to find server
+      socketTimeoutMS: 15000,            // 15s socket timeout
+      connectTimeoutMS: 10000,           // 10s connect timeout
+      maxPoolSize: 3,                    // Small pool for serverless
+      minPoolSize: 0,                    // Release connections when idle
     })
     
     cachedConnection = mongoose.connection
