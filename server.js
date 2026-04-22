@@ -7,45 +7,45 @@ const authRoutes = require("./routes/auth")
 
 const app = express()
 
+// Middleware
 app.use(cors())
 app.use(bodyParser.json())
 app.use(express.static("public"))
 app.use(express.urlencoded({extended:true}))
 
-// Serve API routes first (before catch-all page routes)
+// API routes
 app.use("/api",authRoutes)
 
-// Root route
+// HTML routes (after static middleware so images/js/css are served first)
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/public/index.html")
 })
 
-// Clean URLs for HTML pages (e.g., /contact → /contact.html)
+// Clean URLs for HTML pages only
 app.get("/:page", (req, res) => {
   const page = req.params.page
-  // Don't intercept API routes
-  if (page === 'api') {
-    return res.status(404).send('Not found')
+  
+  // Skip if has file extension (images, .js, .css, etc.)
+  if (page.includes('.')) {
+    return res.status(404).end()
   }
+  
   res.sendFile(__dirname + "/public/" + page + ".html", (err) => {
     if (err) {
-      res.status(404).send('Page not found')
+      res.status(404).end()
     }
   })
 })
 
-// Export for Vercel serverless
+// MongoDB connection
 const mongoURI = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/career_guidance"
 
 const connectDB = async () => {
   try {
-    await mongoose.connect(mongoURI, {
-      // These options help with serverless/reconnection scenarios
-    })
+    await mongoose.connect(mongoURI)
     console.log("Connected to MongoDB")
   } catch (err) {
     console.error("MongoDB connection error:", err)
-    // Retry connection after 3 seconds if in production
     if (process.env.NODE_ENV === 'production') {
       setTimeout(connectDB, 3000)
     }
@@ -54,7 +54,6 @@ const connectDB = async () => {
 
 connectDB()
 
-// Handle mongoose connection events
 mongoose.connection.on('disconnected', () => {
   console.log('MongoDB disconnected')
   if (process.env.NODE_ENV === 'production') {
@@ -62,13 +61,11 @@ mongoose.connection.on('disconnected', () => {
   }
 })
 
-app.use("/api",authRoutes)
-
-// Export for Vercel serverless
+// Export for Vercel
 module.exports = app
 
-// Start server only if not in Vercel (local development)
-if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+// Local dev server
+if (process.env.NODE_ENV !== 'production' && !process.env.VERCEL) {
     const PORT = process.env.PORT || 3000
     app.listen(PORT,()=>{
         console.log(`Server running on port ${PORT}`)
