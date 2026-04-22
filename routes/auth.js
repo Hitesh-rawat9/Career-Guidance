@@ -1,65 +1,71 @@
 const express = require("express")
 const router = express.Router()
 const bcrypt = require("bcryptjs")
-
 const User = require("../models/user")
 
-router.post("/signup", async(req,res)=>{
-
-const {name,email,password}=req.body
-
-// Check if user already exists
-const existingUser = await User.findOne({email})
-if(existingUser) {
-    return res.status(400).json({success: false, message: "Email already registered"})
+// Helper to wrap async routes with error handling
+const asyncHandler = fn => (req, res, next) => {
+  Promise.resolve(fn(req, res, next)).catch(next)
 }
 
-const hash = await bcrypt.hash(password,10)
+// POST /api/signup
+router.post("/signup", asyncHandler(async (req, res) => {
+  const { name, email, password } = req.body
 
-const user = new User({
-name,
-email,
-password:hash
-})
+  if (!name || !email || !password) {
+    return res.status(400).json({ success: false, message: "All fields required" })
+  }
 
-await user.save()
+  const existingUser = await User.findOne({ email })
+  if (existingUser) {
+    return res.status(400).json({ success: false, message: "Email already registered" })
+  }
 
-res.json({success: true, message: "Signup successful"})
+  const hash = await bcrypt.hash(password, 10)
 
-})
+  const user = new User({ name, email, password: hash })
+  await user.save()
 
-router.post("/login", async(req,res)=>{
+  res.json({ success: true, message: "Signup successful" })
+}))
 
-const {email,password}=req.body
+// POST /api/login
+router.post("/login", asyncHandler(async (req, res) => {
+  const { email, password } = req.body
 
-const user = await User.findOne({email})
+  if (!email || !password) {
+    return res.status(400).json({ success: false, message: "Email and password required" })
+  }
 
-if(!user) return res.status(401).json({success: false, message: "User not found"})
+  const user = await User.findOne({ email })
+  if (!user) {
+    return res.status(401).json({ success: false, message: "User not found" })
+  }
 
-const valid = await bcrypt.compare(password,user.password)
+  const valid = await bcrypt.compare(password, user.password)
+  if (!valid) {
+    return res.status(401).json({ success: false, message: "Wrong password" })
+  }
 
-if(!valid) return res.status(401).json({success: false, message: "Wrong password"})
-
-res.json({
-    success: true, 
+  res.json({
+    success: true,
     message: "Login successful",
     user: {
-        id: user._id,
-        name: user.name,
-        email: user.email
+      id: user._id,
+      name: user.name,
+      email: user.email
     }
-})
+  })
+}))
 
-})
-
+// POST /api/logout
 router.post("/logout", (req, res) => {
-    res.json({success: true, message: "Logged out successfully"})
+  res.json({ success: true, message: "Logged out successfully" })
 })
 
-router.get("/me", async(req, res) => {
-    // This endpoint can be extended with authentication middleware
-    res.json({success: false, message: "Not authenticated"})
+// GET /api/me
+router.get("/me", (req, res) => {
+  res.json({ success: false, message: "Not authenticated" })
 })
 
 module.exports = router
-
