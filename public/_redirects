@@ -1,0 +1,2 @@
+/api/*  /server.js  200
+/*      /public/:splat  200
