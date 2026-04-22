@@ -3,6 +3,7 @@ const mongoose = require("mongoose")
 const cors = require("cors")
 const authRoutes = require("./routes/auth")
 const path = require("path")
+const fs = require("fs")
 
 const app = express()
 
@@ -11,11 +12,13 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-// Get project root (works in both Vercel and local)
-const projectRoot = process.cwd()
+// Debug: log public folder contents on startup (dev only)
+if (!process.env.VERCEL) {
+  console.log("Public folder files:", fs.readdirSync(path.join(__dirname, "public")).slice(0, 10))
+}
 
 // Serve static files from public folder
-app.use(express.static(path.join(projectRoot, "public")))
+app.use(express.static(path.join(__dirname, "public")))
 
 // API routes
 app.use("/api", authRoutes)
@@ -23,17 +26,23 @@ app.use("/api", authRoutes)
 // HTML page routes (clean URLs)
 app.get("/:page", (req, res, next) => {
   const page = req.params.page
-  if (page.includes('.')) return next()
+  // Skip if has file extension - static middleware already handled it
+  if (page.includes('.')) {
+    return res.status(404).send('Not found')
+  }
   
-  const filePath = path.join(projectRoot, "public", page + ".html")
+  const filePath = path.join(__dirname, "public", page + ".html")
   res.sendFile(filePath, (err) => {
-    if (err) next()
+    if (err) {
+      console.log("HTML not found:", filePath)
+      res.status(404).send('Page not found')
+    }
   })
 })
 
 // Root route
 app.get("/", (req, res) => {
-  res.sendFile(path.join(projectRoot, "public", "index.html"))
+  res.sendFile(path.join(__dirname, "public", "index.html"))
 })
 
 // MongoDB
