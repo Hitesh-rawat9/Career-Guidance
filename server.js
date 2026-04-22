@@ -14,29 +14,41 @@ app.use(express.urlencoded({extended:true}))
 // API routes
 app.use("/api", authRoutes)
 
-// MongoDB connection - deferred in serverless
+// Lazy MongoDB connection - only connect when needed
+let dbPromise = null
+
 const connectDB = async () => {
+  if (dbPromise) return dbPromise
+  
   const mongoURI = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/career_guidance"
   
+  dbPromise = mongoose.connect(mongoURI, {
+    serverSelectionTimeoutMS: 5000,
+    socketTimeoutMS: 45000,
+  })
+  
   try {
-    await mongoose.connect(mongoURI, {
-      serverSelectionTimeoutMS: 5000,
-      socketTimeoutMS: 45000,
-    })
+    await dbPromise
     console.log("Connected to MongoDB")
-    return true
   } catch (err) {
     console.error("MongoDB connection error:", err.message)
-    return false
+    dbPromise = null
+    throw err
   }
+  
+  return dbPromise
 }
 
-// Connect immediately in all environments
-connectDB()
-
-// Handle disconnection
-mongoose.connection.on('disconnected', () => {
-  console.log('MongoDB disconnected')
+// Middleware to ensure DB is connected before API routes
+app.use("/api", async (req, res, next) => {
+  try {
+    if (!dbPromise) {
+      await connectDB()
+    }
+    next()
+  } catch (err) {
+    res.status(500).json({ error: "Database connection failed" })
+  }
 })
 
 // Export for Vercel
@@ -46,15 +58,14 @@ module.exports = app
 if (process.env.NODE_ENV !== 'production' && !process.env.VERCEL) {
   const PORT = process.env.PORT || 3000
   
-  // Serve static files in dev (Vercel does this in production)
+  // Serve static files
   app.use(express.static("public"))
   
-  // Explicit root route for dev
+  // Routes
   app.get("/", (req, res) => {
     res.sendFile(__dirname + "/public/index.html")
   })
   
-  // Clean URL support for dev
   app.get("/:page", (req, res, next) => {
     const page = req.params.page
     if (!page.includes('.')) {
@@ -65,6 +76,9 @@ if (process.env.NODE_ENV !== 'production' && !process.env.VERCEL) {
       next()
     }
   })
+  
+  // Connect DB in dev
+  connectDB().catch(console.error)
   
   app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
